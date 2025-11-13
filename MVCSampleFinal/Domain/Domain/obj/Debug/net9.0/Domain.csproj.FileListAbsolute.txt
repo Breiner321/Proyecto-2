@@ -9,3 +9,15 @@ C:\Users\Valeria\Desktop\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.dl
 C:\Users\Valeria\Desktop\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\refint\Domain.dll
 C:\Users\Valeria\Desktop\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.pdb
 C:\Users\Valeria\Desktop\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\ref\Domain.dll
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\bin\Debug\net9.0\Domain.deps.json
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\bin\Debug\net9.0\Domain.dll
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\bin\Debug\net9.0\Domain.pdb
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.AssemblyInfoInputs.cache
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.AssemblyInfo.cs
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.sourcelink.json
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.dll
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\refint\Domain.dll
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\Domain.pdb
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Domain\Domain\obj\Debug\net9.0\ref\Domain.dll
