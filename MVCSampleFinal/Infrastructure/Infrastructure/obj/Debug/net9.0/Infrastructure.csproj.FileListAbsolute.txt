@@ -33,3 +33,21 @@ C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Infrastructure\Infrastructure
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.pdb
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.genruntimeconfig.cache
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\ref\Infrastructure.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\bin\Debug\net9.0\Infrastructure.deps.json
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\bin\Debug\net9.0\Infrastructure.runtimeconfig.json
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\bin\Debug\net9.0\Infrastructure.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\bin\Debug\net9.0\Infrastructure.pdb
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\bin\Debug\net9.0\Domain.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\bin\Debug\net9.0\Domain.pdb
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.AssemblyReference.cache
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfoInputs.cache
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfo.cs
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.CoreCompileInputs.cache
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.sourcelink.json
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastr.15EFFBFE.Up2Date
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\refint\Infrastructure.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.pdb
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\Infrastructure.genruntimeconfig.cache
+D:\Estudio\Proyecto-2\MVCSampleFinal\Infrastructure\Infrastructure\obj\Debug\net9.0\ref\Infrastructure.dll

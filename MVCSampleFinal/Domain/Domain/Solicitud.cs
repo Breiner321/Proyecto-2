@@ -12,12 +12,20 @@ namespace Domain
         [Key]
         public Guid Id { get; set; }
 
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } 
 
-        public DateTime Fecha { get; set; }
+        public DateTime Fecha { get; set; } 
 
-        public string Estado { get; set; }
+        public string Estado { get; set; } 
 
         public string Solicitante { get; set; }
+        
+        public Guid UsuarioId { get; set; }
+        public Usuario Usuario { get; set; }
+        public Guid SalaId { get; set; }
+        public Sala Sala { get; set; }
+        public Guid EquipoId { get; set; }
+        public Equipo Equipo { get; set; }
     }
+
 }

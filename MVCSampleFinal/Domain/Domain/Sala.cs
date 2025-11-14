@@ -13,16 +13,16 @@ namespace Domain
         [Key]
         public Guid Id { get; set; }
 
-        public string Numero { get; set; }
+        public string Numero { get; set; } = string.Empty;
 
-        public int Capacidad { get; set; }
+        public int Capacidad { get; set; } 
 
-        public string Ubicacion { get; set; }
+        public string Ubicacion { get; set; } = string.Empty;
 
-        public string Estado { get; set; }
+        public string Estado { get; set; } = string.Empty;
 
-        public List<Equipo> Equipos { get; set; }  
-        
+        public List<Equipo> Equipos { get; set; } = new();
+
         public void AdicionarEquipo(Equipo equipo)
         {
             Equipos.Add(equipo);

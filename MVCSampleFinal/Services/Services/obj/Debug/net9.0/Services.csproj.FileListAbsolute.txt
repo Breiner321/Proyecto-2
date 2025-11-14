@@ -33,3 +33,21 @@ C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Services\Services\obj\Debug\n
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\refint\Services.dll
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.pdb
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\ref\Services.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\bin\Debug\net9.0\Services.deps.json
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\bin\Debug\net9.0\Services.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\bin\Debug\net9.0\Services.pdb
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\bin\Debug\net9.0\Domain.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\bin\Debug\net9.0\Infrastructure.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\bin\Debug\net9.0\Infrastructure.pdb
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\bin\Debug\net9.0\Domain.pdb
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.csproj.AssemblyReference.cache
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.AssemblyInfoInputs.cache
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.AssemblyInfo.cs
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.csproj.CoreCompileInputs.cache
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.sourcelink.json
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.csproj.Up2Date
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\refint\Services.dll
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\Services.pdb
+D:\Estudio\Proyecto-2\MVCSampleFinal\Services\Services\obj\Debug\net9.0\ref\Services.dll
