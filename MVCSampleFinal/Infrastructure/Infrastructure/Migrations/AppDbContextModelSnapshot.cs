@@ -42,6 +42,37 @@ namespace Infrastructure.Migrations
                     b.ToTable("Cows");
                 });
 
+            modelBuilder.Entity("Domain.Equipo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Disponible")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SalaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Ubicacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SalaId");
+
+                    b.ToTable("Equipo");
+                });
+
             modelBuilder.Entity("Domain.Farm", b =>
                 {
                     b.Property<Guid>("Id")
@@ -86,6 +117,100 @@ namespace Infrastructure.Migrations
                     b.ToTable("Milks");
                 });
 
+            modelBuilder.Entity("Domain.Sala", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Capacidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ubicacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sala");
+                });
+
+            modelBuilder.Entity("Domain.Solicitud", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EquipoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("SalaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Solicitante")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EquipoId");
+
+                    b.HasIndex("SalaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Solicitud");
+                });
+
+            modelBuilder.Entity("Domain.Usuario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Contraseña")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
+                });
+
             modelBuilder.Entity("Domain.Cow", b =>
                 {
                     b.HasOne("Domain.Farm", "Farm")
@@ -95,6 +220,17 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Farm");
+                });
+
+            modelBuilder.Entity("Domain.Equipo", b =>
+                {
+                    b.HasOne("Domain.Sala", "Sala")
+                        .WithMany("Equipos")
+                        .HasForeignKey("SalaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sala");
                 });
 
             modelBuilder.Entity("Domain.Milk", b =>
@@ -108,6 +244,33 @@ namespace Infrastructure.Migrations
                     b.Navigation("Cow");
                 });
 
+            modelBuilder.Entity("Domain.Solicitud", b =>
+                {
+                    b.HasOne("Domain.Equipo", "Equipo")
+                        .WithMany()
+                        .HasForeignKey("EquipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Sala", "Sala")
+                        .WithMany()
+                        .HasForeignKey("SalaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Usuario", "Usuario")
+                        .WithMany("Solicitudes")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Equipo");
+
+                    b.Navigation("Sala");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Domain.Cow", b =>
                 {
                     b.Navigation("Milks");
@@ -116,6 +279,16 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Farm", b =>
                 {
                     b.Navigation("Cows");
+                });
+
+            modelBuilder.Entity("Domain.Sala", b =>
+                {
+                    b.Navigation("Equipos");
+                });
+
+            modelBuilder.Entity("Domain.Usuario", b =>
+                {
+                    b.Navigation("Solicitudes");
                 });
 #pragma warning restore 612, 618
         }

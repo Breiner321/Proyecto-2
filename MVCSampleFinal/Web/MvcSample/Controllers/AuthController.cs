@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain; // tu namespace real
-using System.Collections.Generic;
+using Domain;
+using Infrastructure;  // para AppDbContext
 using System.Linq;
 
 namespace MVCSampleFinal.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly List<Usuario> _usuarios = new List<Usuario>
+        private readonly AppDbContext _context;
+
+        // El contexto llega por inyección de dependencias
+        public AuthController(AppDbContext context)
         {
-            new Usuario { Nombre = "admin", Contraseña = "1234" }
-        };
+            _context = context;
+        }
 
         public IActionResult Login()
         {
@@ -20,7 +23,7 @@ namespace MVCSampleFinal.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            var usuario = _usuarios
+            var usuario = _context.Usuarios
                 .FirstOrDefault(u => u.Nombre == username && u.Contraseña == password);
 
             if (usuario == null)
@@ -29,7 +32,48 @@ namespace MVCSampleFinal.Controllers
                 return View();
             }
 
+            // Aquí podrías guardar info en sesión, claims, etc.
+            // HttpContext.Session.SetString("Usuario", usuario.Nombre);
             return RedirectToAction("Index", "Home");
+        }
+
+        // 👉 NUEVO: Registro de usuario
+        [HttpPost]
+        public IActionResult Register(string newUsername, string newPassword, string confirmPassword)
+        {
+            if (string.IsNullOrWhiteSpace(newUsername) ||
+                string.IsNullOrWhiteSpace(newPassword) ||
+                string.IsNullOrWhiteSpace(confirmPassword))
+            {
+                ViewBag.RegisterError = "Todos los campos son obligatorios.";
+                return View("Login");
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                ViewBag.RegisterError = "Las contraseñas no coinciden.";
+                return View("Login");
+            }
+
+            // ¿Ya existe?
+            bool existe = _context.Usuarios.Any(u => u.Nombre == newUsername);
+            if (existe)
+            {
+                ViewBag.RegisterError = "El nombre de usuario ya existe.";
+                return View("Login");
+            }
+
+            var nuevoUsuario = new Usuario
+            {
+                Nombre = newUsername,
+                Contraseña = newPassword  // en real sería mejor hashearla
+            };
+
+            _context.Usuarios.Add(nuevoUsuario);
+            _context.SaveChanges();  // 👉 se guarda en tu BD en la nube
+
+            ViewBag.RegisterSuccess = "Usuario registrado correctamente. Ahora puede iniciar sesión.";
+            return View("Login");
         }
     }
 }

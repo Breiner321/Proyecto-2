@@ -2,25 +2,62 @@
     ViewData["Title"] = "Login";
 }
 
-<div style="max-width:400px; margin:50px auto; padding:20px; background:#eef; border-radius:10px;">
-    <h2>Iniciar Sesión</h2>
+<h2>Login / Registro</h2>
 
-    <form method="post">
-        <div style="margin-bottom:10px;">
-            <label>Usuario:</label>
-            <input type="text" name="username" class="form-control" />
-        </div>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
 
-        <div style="margin-bottom:10px;">
-            <label>Contraseña:</label>
-            <input type="password" name="password" class="form-control" />
-        </div>
+@if (ViewBag.RegisterError != null)
+{
+    <div class="alert alert-danger">@ViewBag.RegisterError</div>
+}
 
-        @if (ViewBag.Error != null)
-        {
-            <p style="color:red;">@ViewBag.Error</p>
-        }
+@if (ViewBag.RegisterSuccess != null)
+{
+    <div class="alert alert-success">@ViewBag.RegisterSuccess</div>
+}
 
-        <button type="submit" class="btn btn-primary">Entrar</button>
-    </form>
+<div class="row">
+    <!-- FORM LOGIN -->
+    <div class="col-md-6">
+        <h3>Iniciar sesión</h3>
+        <form asp-action="Login" asp-controller="Auth" method="post">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" name="username" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Entrar</button>
+        </form>
+    </div>
+
+    <!-- FORM REGISTRO -->
+    <div class="col-md-6">
+        <h3>Registrarse</h3>
+        <form asp-action="Register" asp-controller="Auth" method="post">
+            <div class="form-group">
+                <label for="newUsername">Usuario</label>
+                <input type="text" name="newUsername" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">Contraseña</label>
+                <input type="password" name="newPassword" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmar contraseña</label>
+                <input type="password" name="confirmPassword" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-success mt-2">Crear cuenta</button>
+        </form>
+    </div>
 </div>
