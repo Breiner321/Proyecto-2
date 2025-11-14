@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class salas
+    public class Sala
     {
         [Key]
         public Guid Id { get; set; }
@@ -18,6 +18,9 @@ namespace Domain
         public int Capacidad { get; set; }
 
         public string Ubicacion { get; set; }
+
+        public string Estado { get; set; }
+
         public List<Equipo> Equipos { get; set; }  
         
         public void AdicionarEquipo(Equipo equipo)

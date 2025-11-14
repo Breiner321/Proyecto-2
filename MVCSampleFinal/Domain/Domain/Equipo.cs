@@ -18,6 +18,8 @@ namespace Domain
 
         public string Ubicacion { get; set; } = string.Empty;
         public Guid SalaId { get; set; }
-        public salas Sala { get; set; }
+        public sala Sala { get; set; }
+
+        public bool Disponible { get; set; }
     }
 }

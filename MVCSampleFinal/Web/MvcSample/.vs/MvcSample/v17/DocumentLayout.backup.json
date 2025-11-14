@@ -3,6 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Web\\MvcSample\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\domain\\domain\\solicitud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\domain\\domain\\equipo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\domain\\domain\\sala.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251114042604_009.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\domain\\domain\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\infrastructure\\infrastructure\\migrations\\20251114041704_008.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\web\\mvcsample\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -38,8 +56,73 @@
       "DocumentGroups": [
         {
           "DockedWidth": 131,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20251114042604_009.cs",
+              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251114042604_009.cs",
+              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251114042604_009.cs",
+              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251114042604_009.cs",
+              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251114042604_009.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T04:26:04.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Usuario.cs",
+              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Usuario.cs",
+              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Usuario.cs",
+              "RelativeToolTip": "..\\..\\Domain\\Domain\\Usuario.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T04:21:30.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20251114041704_008.cs",
+              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251114041704_008.cs",
+              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251114041704_008.cs",
+              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251114041704_008.cs",
+              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251114041704_008.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T04:17:05.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Equipo.cs",
+              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Equipo.cs",
+              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Equipo.cs",
+              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Equipo.cs*",
+              "RelativeToolTip": "..\\..\\Domain\\Domain\\Equipo.cs*",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T04:15:32.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Solicitud.cs",
+              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Solicitud.cs",
+              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Solicitud.cs",
+              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Solicitud.cs",
+              "RelativeToolTip": "..\\..\\Domain\\Domain\\Solicitud.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T04:10:44.64Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -57,23 +140,21 @@
               "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20251108020944_007.cs",
-              "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
-              "ToolTip": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
+              "DocumentIndex": 2,
+              "Title": "Sala.cs",
+              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Sala.cs",
+              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Sala.cs",
+              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Domain\\Domain\\Sala.cs*",
+              "RelativeToolTip": "..\\..\\Domain\\Domain\\Sala.cs*",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-08T02:09:44.861Z"
+              "WhenOpened": "2025-11-14T04:09:07.624Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Web\\MvcSample\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -86,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "20251108012712_006.cs",
               "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108012712_006.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108012712_006.cs",
@@ -98,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "20251108012506_005.cs",
               "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108012506_005.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108012506_005.cs",
@@ -109,8 +190,23 @@
               "WhenOpened": "2025-11-08T01:25:06.917Z"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
+              "Title": "20251108020944_007.cs",
+              "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
+              "ToolTip": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108020944_007.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-08T02:09:44.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "20251108012230_004.cs",
               "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108012230_004.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251108012230_004.cs",
@@ -122,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "Equipo.cs",
               "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\Equipo.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\Equipo.cs",
@@ -134,7 +230,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "salas.cs",
               "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\salas.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\salas.cs",
@@ -146,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "EstadoSalas.cs",
               "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\Enums\\EstadoSalas.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\Enums\\EstadoSalas.cs",
@@ -158,7 +254,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "Solicitudes.cs",
               "DocumentMoniker": "C:\\Users\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\Solicitudes.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Valeria\\Desktop\\MVCSampleFinal\\Domain\\Domain\\Solicitudes.cs",

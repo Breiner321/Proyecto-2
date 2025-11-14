@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    internal class Solicitudes
+    public class Solicitud
     {
         [Key]
         public Guid Id { get; set; }
