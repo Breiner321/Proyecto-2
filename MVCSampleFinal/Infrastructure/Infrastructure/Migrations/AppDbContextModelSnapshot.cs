@@ -22,26 +22,6 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Cow", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FarmId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Race")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FarmId");
-
-                    b.ToTable("Cows");
-                });
-
             modelBuilder.Entity("Domain.Equipo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -70,51 +50,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("SalaId");
 
-                    b.ToTable("Equipo");
-                });
-
-            modelBuilder.Entity("Domain.Farm", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Farms");
-                });
-
-            modelBuilder.Entity("Domain.Milk", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CowId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Litters")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ProductionDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CowId");
-
-                    b.ToTable("Milks");
+                    b.ToTable("Equipos");
                 });
 
             modelBuilder.Entity("Domain.Sala", b =>
@@ -140,7 +76,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sala");
+                    b.ToTable("Salas");
                 });
 
             modelBuilder.Entity("Domain.Solicitud", b =>
@@ -152,9 +88,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("EquipoId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Estado")
                         .IsRequired()
@@ -175,13 +108,47 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EquipoId");
-
                     b.HasIndex("SalaId");
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Solicitud");
+                    b.ToTable("Solicitudes");
+                });
+
+            modelBuilder.Entity("Domain.SolicitudEquipo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EquipoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Solicitante")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EquipoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("SolicitudesEquipo");
                 });
 
             modelBuilder.Entity("Domain.Usuario", b =>
@@ -211,17 +178,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("Domain.Cow", b =>
-                {
-                    b.HasOne("Domain.Farm", "Farm")
-                        .WithMany("Cows")
-                        .HasForeignKey("FarmId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Farm");
-                });
-
             modelBuilder.Entity("Domain.Equipo", b =>
                 {
                     b.HasOne("Domain.Sala", "Sala")
@@ -233,25 +189,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Sala");
                 });
 
-            modelBuilder.Entity("Domain.Milk", b =>
-                {
-                    b.HasOne("Domain.Cow", "Cow")
-                        .WithMany("Milks")
-                        .HasForeignKey("CowId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cow");
-                });
-
             modelBuilder.Entity("Domain.Solicitud", b =>
                 {
-                    b.HasOne("Domain.Equipo", "Equipo")
-                        .WithMany()
-                        .HasForeignKey("EquipoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Sala", "Sala")
                         .WithMany()
                         .HasForeignKey("SalaId")
@@ -264,21 +203,33 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Equipo");
-
                     b.Navigation("Sala");
 
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Domain.Cow", b =>
+            modelBuilder.Entity("Domain.SolicitudEquipo", b =>
                 {
-                    b.Navigation("Milks");
+                    b.HasOne("Domain.Equipo", "Equipo")
+                        .WithMany("SolicitudesEquipo")
+                        .HasForeignKey("EquipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Usuario", "Usuario")
+                        .WithMany("SolicitudesEquipo")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Equipo");
+
+                    b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Domain.Farm", b =>
+            modelBuilder.Entity("Domain.Equipo", b =>
                 {
-                    b.Navigation("Cows");
+                    b.Navigation("SolicitudesEquipo");
                 });
 
             modelBuilder.Entity("Domain.Sala", b =>
@@ -289,6 +240,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Usuario", b =>
                 {
                     b.Navigation("Solicitudes");
+
+                    b.Navigation("SolicitudesEquipo");
                 });
 #pragma warning restore 612, 618
         }

@@ -21,5 +21,7 @@ namespace Domain
         public Sala Sala { get; set; } 
 
         public bool Disponible { get; set; }
+
+        public List<SolicitudEquipo> SolicitudesEquipo { get; set; } = new();
     }
 }

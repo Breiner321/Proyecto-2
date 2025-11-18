@@ -15,11 +15,16 @@ namespace Domain
             public string Contraseña { get; set; } = string.Empty;
             public string Rol { get; set; } = string.Empty;
             public List<Solicitud> Solicitudes { get; set; } = new();
+            public List<SolicitudEquipo> SolicitudesEquipo { get; set; } = new();
 
         public void AdicionarSolicitud(Solicitud solicitud)
             {
                Solicitudes.Add(solicitud);
+            }
 
+        public void AdicionarSolicitudEquipo(SolicitudEquipo solicitudEquipo)
+            {
+               SolicitudesEquipo.Add(solicitudEquipo);
             }
 
         }

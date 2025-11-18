@@ -24,8 +24,6 @@ namespace Domain
         public Usuario Usuario { get; set; }
         public Guid SalaId { get; set; }
         public Sala Sala { get; set; }
-        public Guid EquipoId { get; set; }
-        public Equipo Equipo { get; set; }
     }
 
 }

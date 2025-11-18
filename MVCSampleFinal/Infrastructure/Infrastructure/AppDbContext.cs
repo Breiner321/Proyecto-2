@@ -15,6 +15,10 @@ namespace Infrastructure
         }
         
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Sala> Salas { get; set; }
+        public DbSet<Equipo> Equipos { get; set; }
+        public DbSet<Solicitud> Solicitudes { get; set; }
+        public DbSet<SolicitudEquipo> SolicitudesEquipo { get; set; }
     }
 
 }
