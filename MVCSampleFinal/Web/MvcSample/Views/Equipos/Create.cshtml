@@ -1,0 +1,62 @@
+@model Domain.Equipo
+@{
+    ViewData["Title"] = "Crear Equipo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var salas = ViewBag.Salas as SelectList ?? new SelectList(new List<Domain.Sala>(), "Id", "Numero");
+}
+
+<h2 class="page-title">Crear Nuevo Equipo</h2>
+
+<div style="max-width: 600px;">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Nombre" style="display: block; font-weight: 600; margin-bottom: 5px;">Nombre del Equipo *</label>
+            <input asp-for="Nombre" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" required />
+            <span asp-validation-for="Nombre" style="color: #dc3545;"></span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label asp-for="SalaId" style="display: block; font-weight: 600; margin-bottom: 5px;">Sala *</label>
+            <select asp-for="SalaId" asp-items="salas" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" required>
+                <option value="">-- Seleccione una sala --</option>
+            </select>
+            <span asp-validation-for="SalaId" style="color: #dc3545;"></span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Ubicacion" style="display: block; font-weight: 600; margin-bottom: 5px;">Ubicación *</label>
+            <input asp-for="Ubicacion" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" required />
+            <span asp-validation-for="Ubicacion" style="color: #dc3545;"></span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label asp-for="Estado" style="display: block; font-weight: 600; margin-bottom: 5px;">Estado</label>
+            <select asp-for="Estado" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="Libre">Libre</option>
+                <option value="Asignado">Asignado</option>
+                <option value="Bloqueado">Bloqueado</option>
+            </select>
+            <span asp-validation-for="Estado" style="color: #dc3545;"></span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input asp-for="Disponible" type="checkbox" style="width: 20px; height: 20px; cursor: pointer;" />
+                <span style="font-weight: 600;">Disponible</span>
+            </label>
+            <span asp-validation-for="Disponible" style="color: #dc3545;"></span>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 30px;">
+            <button type="submit" class="btn-nuevo" style="border: none; cursor: pointer;">Crear Equipo</button>
+            <a asp-action="Index" style="padding: 10px 20px; background: #6c757d; color: white; border-radius: 6px; text-decoration: none; display: inline-block;">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -17,89 +17,137 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MvcSample
 build_property.RootNamespace = MvcSample
-build_property.ProjectDir = D:\Estudio\Proyecto-2\MVCSampleFinal\Web\MvcSample\
+build_property.ProjectDir = C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Estudio\Proyecto-2\MVCSampleFinal\Web\MvcSample
+build_property.MSBuildProjectDirectory = C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Auth/Login.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Auth/OlvideContraseña.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Auth/OlvideContraseña.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxPbHZpZGVDb250cmFzZcOxYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Auth/Registro.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Auth/Registro.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3Ryby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Configuracion/Index.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Configuracion/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhY2lvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Equipos/Index.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Coordinator/Configuracion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29vcmRpbmF0b3JcQ29uZmlndXJhY2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Coordinator/Equipos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29vcmRpbmF0b3JcRXF1aXBvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Coordinator/EstadoOcupacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29vcmRpbmF0b3JcRXN0YWRvT2N1cGFjaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Coordinator/Reportes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29vcmRpbmF0b3JcUmVwb3J0ZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Coordinator/Solicitudes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29vcmRpbmF0b3JcU29saWNpdHVkZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Equipos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXF1aXBvc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Equipos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXF1aXBvc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Equipos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXF1aXBvc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Equipos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXF1aXBvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Home/Index.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Home/Privacy.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Reportes/Index.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Reportes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Salas/Index.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Salas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsYXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Salas/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsYXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Salas/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsYXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Salas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Shared/Error.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Shared/_AdminLayout.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Shared/_AdminLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Shared/_CoordinatorLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db29yZGluYXRvckxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Usuarios/Create.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Usuarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Usuarios/Edit.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Usuarios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Usuarios/Index.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/_ViewImports.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/_ViewStart.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Estudio/Proyecto-2/MVCSampleFinal/Web/MvcSample/Views/Shared/_Layout.cshtml]
+[C:/Users/Breiner/Desktop/Proyecto 2/MVCSampleFinal/Web/MvcSample/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2sss1o9de5

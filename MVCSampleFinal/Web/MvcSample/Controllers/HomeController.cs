@@ -17,11 +17,15 @@ namespace MvcSample.Controllers
 
         public IActionResult Index()
         {
-            // Si es administrador, redirigir al dashboard
+            // Redirigir según el rol
             var rol = HttpContext.Session.GetString("UsuarioRol");
             if (rol == "Administrador")
             {
                 return RedirectToAction("Index", "Usuarios");
+            }
+            else if (rol == "Coordinador")
+            {
+                return RedirectToAction("Equipos", "Coordinator");
             }
 
             return View();

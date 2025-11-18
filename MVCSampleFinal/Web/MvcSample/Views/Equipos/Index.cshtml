@@ -1,3 +1,4 @@
+@model List<Domain.Equipo>
 @{
     ViewData["Title"] = "Equipos";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -5,5 +6,74 @@
 
 <h2 class="page-title">Equipos</h2>
 
-<p>Gestión de equipos próximamente...</p>
+<div class="search-bar">
+    <a asp-action="Create" class="btn-nuevo">+ Nuevo Equipo</a>
+</div>
 
+@if (TempData["Error"] != null)
+{
+    <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Sala</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Disponible</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var equipo in Model)
+                {
+                    var estado = equipo.Estado ?? "Libre";
+                    var estadoClass = estado switch
+                    {
+                        "Asignado" => "status-asignado",
+                        "Bloqueado" => "status-bloqueado",
+                        _ => "status-libre"
+                    };
+
+                    <tr>
+                        <td><strong>@equipo.Nombre</strong></td>
+                        <td>@(equipo.Sala != null ? $"Sala {equipo.Sala.Numero}" : "Sin sala")</td>
+                        <td>@equipo.Ubicacion</td>
+                        <td>
+                            <span class="status-badge @estadoClass">@estado</span>
+                        </td>
+                        <td>
+                            @if (equipo.Disponible)
+                            {
+                                <span style="color: #28a745;">✓ Sí</span>
+                            }
+                            else
+                            {
+                                <span style="color: #dc3545;">✗ No</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@equipo.Id" class="btn-editar">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@equipo.Id" class="btn-eliminar" style="text-decoration: none; display: inline-block;">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 40px; color: #999;">
+                        No hay equipos registrados. <a asp-action="Create">Crear primer equipo</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

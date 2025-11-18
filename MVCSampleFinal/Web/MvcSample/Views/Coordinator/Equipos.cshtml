@@ -1,0 +1,176 @@
+@model List<Domain.Equipo>
+@{
+    ViewData["Title"] = "Equipos";
+    Layout = "~/Views/Shared/_CoordinatorLayout.cshtml";
+    var salas = ViewBag.Salas as List<Domain.Sala> ?? new List<Domain.Sala>();
+    var salaSeleccionada = ViewBag.SalaSeleccionada as string ?? "Sala A";
+    var buscar = ViewBag.Buscar as string ?? "";
+}
+@Html.AntiForgeryToken()
+
+<div class="room-tabs">
+    @foreach (var sala in salas)
+    {
+        var nombreSala = $"Sala {sala.Numero}";
+        <button class="room-tab @(salaSeleccionada == nombreSala ? "active" : "")" 
+                onclick="location.href='@Url.Action("Equipos", "Coordinator", new { sala = nombreSala, buscar = buscar })'">
+            @nombreSala
+        </button>
+    }
+    @if (!salas.Any())
+    {
+        <button class="room-tab @(salaSeleccionada == "Sala A" ? "active" : "")" 
+                onclick="location.href='@Url.Action("Equipos", "Coordinator", new { sala = "Sala A", buscar = buscar })'">
+            Sala A
+        </button>
+        <button class="room-tab @(salaSeleccionada == "Sala B" ? "active" : "")" 
+                onclick="location.href='@Url.Action("Equipos", "Coordinator", new { sala = "Sala B", buscar = buscar })'">
+            Sala B
+        </button>
+        <button class="room-tab @(salaSeleccionada == "Sala C" ? "active" : "")" 
+                onclick="location.href='@Url.Action("Equipos", "Coordinator", new { sala = "Sala C", buscar = buscar })'">
+            Sala C
+        </button>
+    }
+</div>
+
+<div class="search-bar">
+    <h2 class="page-title" style="margin: 0;">Equipos</h2>
+    <div class="search-input-wrapper">
+        <form method="get" action="@Url.Action("Equipos", "Coordinator")" style="display: flex; gap: 10px;">
+            <input type="hidden" name="sala" value="@salaSeleccionada" />
+            <input type="text" name="buscar" class="search-input" placeholder="Buscar" value="@buscar" />
+            <button type="submit" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                <span class="search-icon">🔍</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Equipo</th>
+                <th>Estado</th>
+                <th>Informacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var equipo in Model)
+                {
+                    var estado = equipo.Estado ?? "Libre";
+                    var estadoClass = estado switch
+                    {
+                        "Asignado" => "status-asignado",
+                        "Bloqueado" => "status-bloqueado",
+                        _ => "status-libre"
+                    };
+
+                    // Obtener información del equipo
+                    var informacion = "No Informacion";
+                    var solicitudActiva = equipo.SolicitudesEquipo?.FirstOrDefault(s => s.Estado == "Aprobada" || s.Estado == "Pendiente");
+                    
+                    if (solicitudActiva != null && solicitudActiva.Usuario != null)
+                    {
+                        informacion = solicitudActiva.Usuario.Nombre;
+                    }
+                    else if (estado == "Bloqueado")
+                    {
+                        informacion = "Fallas";
+                    }
+                    else if (estado == "Asignado")
+                    {
+                        informacion = "En uso";
+                    }
+
+                    <tr>
+                        <td>@equipo.Nombre</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="status-badge @estadoClass">@estado</span>
+                                <select onchange="actualizarEstado('@equipo.Id', this.value)" 
+                                        style="padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                                    @if (estado == "Libre")
+                                    {
+                                        <option value="Libre" selected>Libre</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Libre">Libre</option>
+                                    }
+                                    @if (estado == "Asignado")
+                                    {
+                                        <option value="Asignado" selected>Asignado</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Asignado">Asignado</option>
+                                    }
+                                    @if (estado == "Bloqueado")
+                                    {
+                                        <option value="Bloqueado" selected>Bloqueado</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Bloqueado">Bloqueado</option>
+                                    }
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="info-dropdown">
+                                @informacion
+                                <span class="dropdown-icon">▼</span>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 40px; color: #999;">
+                        No hay equipos disponibles en esta sala
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function actualizarEstado(equipoId, nuevoEstado) {
+            if (!confirm('¿Está seguro de cambiar el estado del equipo?')) {
+                location.reload();
+                return;
+            }
+            
+            $.ajax({
+                url: '@Url.Action("ActualizarEstadoEquipo", "Coordinator")',
+                method: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                data: {
+                    equipoId: equipoId,
+                    nuevoEstado: nuevoEstado
+                },
+                success: function(data) {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error al actualizar el estado: ' + data.message);
+                        location.reload();
+                    }
+                },
+                error: function() {
+                    alert('Error al actualizar el estado');
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+
