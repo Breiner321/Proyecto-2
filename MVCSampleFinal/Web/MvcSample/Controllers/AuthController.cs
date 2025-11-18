@@ -19,9 +19,22 @@ namespace MVCSampleFinal.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            // Si ya está autenticado, redirigir al home
+            // Si ya está autenticado, redirigir según el rol
             if (HttpContext.Session.GetString("UsuarioId") != null)
             {
+                var rol = HttpContext.Session.GetString("UsuarioRol");
+                if (rol == "Administrador")
+                {
+                    return RedirectToAction("Index", "Usuarios");
+                }
+                else if (rol == "Coordinador")
+                {
+                    return RedirectToAction("Equipos", "Coordinator");
+                }
+                else if (rol == "Estudiante" || rol == "Usuario")
+                {
+                    return RedirectToAction("ReservarSala", "Student");
+                }
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -67,6 +80,14 @@ namespace MVCSampleFinal.Controllers
             if (usuario.Rol == "Administrador")
             {
                 return RedirectToAction("Index", "Usuarios");
+            }
+            else if (usuario.Rol == "Coordinador")
+            {
+                return RedirectToAction("Equipos", "Coordinator");
+            }
+            else if (usuario.Rol == "Estudiante" || usuario.Rol == "Usuario")
+            {
+                return RedirectToAction("ReservarSala", "Student");
             }
 
             return RedirectToAction("Index", "Home");

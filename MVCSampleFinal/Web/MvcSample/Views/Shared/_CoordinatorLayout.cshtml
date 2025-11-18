@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - USC Coordinador</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MvcSample.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 80px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #1e3c72;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+            line-height: 1.2;
+            padding: 5px;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .logout-form {
+            margin: 0;
+        }
+
+        .container-wrapper {
+            display: flex;
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #6c757d;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 80px;
+            bottom: 0;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-menu li {
+            margin: 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: #5a6268;
+            border-left-color: #007bff;
+        }
+
+        .sidebar-menu a.active {
+            background-color: #5a6268;
+            border-left-color: #007bff;
+            font-weight: 600;
+        }
+
+        .sidebar-menu-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            display: inline-block;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 30px;
+            background-color: #ffffff;
+        }
+
+        .content-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-input-wrapper {
+            flex: 1;
+            position: relative;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+
+        .room-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .room-tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .room-tab:hover {
+            color: #007bff;
+            background-color: #f8f9fa;
+        }
+
+        .room-tab.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+            font-weight: 600;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background-color: #f8f9fa;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-asignado {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-bloqueado {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-libre {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .info-dropdown {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-icon {
+            font-size: 16px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="logo-circle">
+                INSTITUCIONAL<br>USC
+            </div>
+            <div class="header-text">
+                <div class="header-subtitle">Somos calidad, somos USC</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <span>Perfil Coordinador</span>
+            @{
+                var usuarioNombre = Context.Session.GetString("UsuarioNombre");
+            }
+            @if (!string.IsNullOrEmpty(usuarioNombre))
+            {
+                <span style="font-size: 14px; opacity: 0.9;">@usuarioNombre</span>
+                <form asp-action="Logout" asp-controller="Auth" method="post" class="logout-form">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="logout-btn">Cerrar Sesión</button>
+                </form>
+            }
+        </div>
+    </div>
+
+    <div class="container-wrapper">
+        <nav class="sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a asp-controller="Coordinator" asp-action="EstadoOcupacion" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "EstadoOcupacion" ? "active" : "")">
+                        <span class="sidebar-menu-icon">✓</span>
+                        Estado Ocupacion
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Coordinator" asp-action="Solicitudes" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Solicitudes" ? "active" : "")">
+                        <span class="sidebar-menu-icon">✓</span>
+                        Solicitudes
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Coordinator" asp-action="Equipos" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Equipos" ? "active" : "")">
+                        <span class="sidebar-menu-icon">🖥️</span>
+                        Equipos
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Coordinator" asp-action="Reportes" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Reportes" ? "active" : "")">
+                        <span class="sidebar-menu-icon">✓</span>
+                        Reportes
+                    </a>
+                </li>
+                <li style="margin-top: auto; position: absolute; bottom: 20px; width: 100%;">
+                    <a asp-controller="Coordinator" asp-action="Configuracion" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Configuracion" ? "active" : "")">
+                        <span class="sidebar-menu-icon">⚙️</span>
+                        Configuracion
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="content-panel">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

@@ -1,3 +1,4 @@
+@model List<Domain.Sala>
 @{
     ViewData["Title"] = "Salas";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -5,5 +6,65 @@
 
 <h2 class="page-title">Salas</h2>
 
-<p>Gestión de salas próximamente...</p>
+<div class="search-bar">
+    <a asp-action="Create" class="btn-nuevo">+ Nueva Sala</a>
+</div>
 
+@if (TempData["Error"] != null)
+{
+    <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Ubicación</th>
+                <th>Capacidad</th>
+                <th>Estado</th>
+                <th>Equipos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var sala in Model)
+                {
+                    var estadoClass = sala.Estado switch
+                    {
+                        "Disponible" => "status-libre",
+                        "Ocupada" => "status-asignado",
+                        _ => "status-bloqueado"
+                    };
+                    var equiposCount = sala.Equipos?.Count ?? 0;
+
+                    <tr>
+                        <td><strong>Sala @sala.Numero</strong></td>
+                        <td>@sala.Ubicacion</td>
+                        <td>@sala.Capacidad personas</td>
+                        <td>
+                            <span class="status-badge @estadoClass">@(string.IsNullOrEmpty(sala.Estado) ? "Disponible" : sala.Estado)</span>
+                        </td>
+                        <td>@equiposCount</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@sala.Id" class="btn-editar">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@sala.Id" class="btn-eliminar" style="text-decoration: none; display: inline-block;">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 40px; color: #999;">
+                        No hay salas registradas. <a asp-action="Create">Crear primera sala</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

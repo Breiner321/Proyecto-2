@@ -73,6 +73,30 @@
         .header-right {
             font-size: 16px;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .logout-form {
+            margin: 0;
         }
 
         .container-wrapper {
@@ -276,7 +300,18 @@
             </div>
         </div>
         <div class="header-right">
-            Perfil Administrador
+            <span>Perfil Administrador</span>
+            @{
+                var usuarioNombre = Context.Session.GetString("UsuarioNombre");
+            }
+            @if (!string.IsNullOrEmpty(usuarioNombre))
+            {
+                <span style="font-size: 14px; opacity: 0.9;">@usuarioNombre</span>
+                <form asp-action="Logout" asp-controller="Auth" method="post" class="logout-form">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="logout-btn">Cerrar Sesión</button>
+                </form>
+            }
         </div>
     </div>
 

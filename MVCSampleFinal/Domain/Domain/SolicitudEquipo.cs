@@ -16,6 +16,10 @@ namespace Domain
 
         public DateTime Fecha { get; set; }
 
+        public DateTime? FechaHoraInicio { get; set; }
+
+        public DateTime? FechaHoraFin { get; set; }
+
         public string Estado { get; set; } = string.Empty;
 
         public string Solicitante { get; set; } = string.Empty;

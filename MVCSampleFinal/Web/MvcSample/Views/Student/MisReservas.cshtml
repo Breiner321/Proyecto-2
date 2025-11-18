@@ -1,0 +1,161 @@
+@{
+    ViewData["Title"] = "Mis Reservas";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var solicitudesSala = ViewBag.SolicitudesSala as List<Domain.Solicitud> ?? new List<Domain.Solicitud>();
+    var solicitudesEquipo = ViewBag.SolicitudesEquipo as List<Domain.SolicitudEquipo> ?? new List<Domain.SolicitudEquipo>();
+}
+
+<h2 style="color: #2c3e50; margin-bottom: 25px;">Mis Reservas</h2>
+
+<div style="margin-bottom: 30px;">
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Reservas de Salas</h3>
+    <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @if (solicitudesSala.Any())
+        {
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f8f9fa;">
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Descripción</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Fecha</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var solicitud in solicitudesSala)
+                    {
+                        var estadoClass = solicitud.Estado switch
+                        {
+                            "Aprobada" => "status-libre",
+                            "Rechazada" => "status-bloqueado",
+                            _ => "status-asignado"
+                        };
+
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Descripcion</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">
+                                <span class="status-badge @estadoClass">@solicitud.Estado</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p style="text-align: center; padding: 40px; color: #999;">No tienes reservas de salas</p>
+        }
+    </div>
+</div>
+
+<div>
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Reservas de Equipos</h3>
+    <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @if (solicitudesEquipo.Any())
+        {
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f8f9fa;">
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Equipo</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Descripción</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Fecha Solicitud</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Inicio</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Fin</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Estado</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var solicitud in solicitudesEquipo)
+                    {
+                        var estadoClass = solicitud.Estado switch
+                        {
+                            "Aprobada" => "status-libre",
+                            "Rechazada" => "status-bloqueado",
+                            _ => "status-asignado"
+                        };
+
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@(solicitud.Equipo?.Nombre ?? "N/A")</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Descripcion</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">
+                                @if (solicitud.FechaHoraInicio.HasValue)
+                                {
+                                    @solicitud.FechaHoraInicio.Value.ToString("dd/MM/yyyy HH:mm")
+                                }
+                                else
+                                {
+                                    <text>-</text>
+                                }
+                            </td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">
+                                @if (solicitud.FechaHoraFin.HasValue)
+                                {
+                                    @solicitud.FechaHoraFin.Value.ToString("dd/MM/yyyy HH:mm")
+                                }
+                                else
+                                {
+                                    <text>-</text>
+                                }
+                            </td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">
+                                <span class="status-badge @estadoClass">@solicitud.Estado</span>
+                            </td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">
+                                @if (solicitud.Estado == "Aprobada")
+                                {
+                                    <button onclick="liberarEquipo('@solicitud.Id')" style="padding: 6px 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                        Liberar
+                                    </button>
+                                }
+                                else
+                                {
+                                    <text>-</text>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p style="text-align: center; padding: 40px; color: #999;">No tienes reservas de equipos</p>
+        }
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        function liberarEquipo(solicitudId) {
+            if (!confirm('¿Está seguro de que desea liberar este equipo?')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("LiberarEquipo", "Student")',
+                method: 'POST',
+                data: {
+                    solicitudId: solicitudId,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Equipo liberado correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al liberar el equipo');
+                }
+            });
+        }
+    </script>
+}
+

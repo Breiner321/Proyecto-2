@@ -1,0 +1,179 @@
+@{
+    ViewData["Title"] = "Reservar Equipo";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var equipos = ViewBag.Equipos as List<Domain.Equipo> ?? new List<Domain.Equipo>();
+    var buscar = ViewBag.Buscar as string ?? "";
+}
+
+<div class="search-filter-section">
+    <form method="get" action="@Url.Action("ReservarEquipo", "Student")" style="display: flex; gap: 15px; width: 100%;">
+        <input type="text" name="buscar" class="search-input" placeholder="Buscar equipo por nombre, ubicación o sala..." value="@buscar" />
+        <button type="submit" style="padding: 10px 20px; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+            Buscar
+        </button>
+        @if (!string.IsNullOrWhiteSpace(buscar))
+        {
+            <a href="@Url.Action("ReservarEquipo", "Student")" style="padding: 10px 20px; background: #6c757d; color: white; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 14px;">
+                Limpiar
+            </a>
+        }
+    </form>
+</div>
+
+<div class="content-panels">
+    <div class="panel" style="grid-column: 1 / -1;">
+        <h3 class="panel-title">Equipos Disponibles</h3>
+        <table class="equipment-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Ubicación</th>
+                    <th>Sala</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (equipos.Any())
+                {
+                    @foreach (var equipo in equipos)
+                    {
+                        var estado = equipo.Estado ?? "Libre";
+                        var estadoClass = estado switch
+                        {
+                            "Asignado" => "status-asignado",
+                            "Bloqueado" => "status-bloqueado",
+                            _ => "status-libre"
+                        };
+                        var puedeReservar = equipo.Disponible && estado != "Bloqueado";
+
+                        <tr>
+                            <td>@(equipo.Nombre ?? "Sin nombre")</td>
+                            <td>
+                                <span class="status-badge @estadoClass">@estado</span>
+                            </td>
+                            <td>@equipo.Ubicacion</td>
+                            <td>@(equipo.Sala?.Numero ?? "N/A")</td>
+                            <td>
+                                <button class="btn-reservar" 
+                                        onclick="reservarEquipo('@equipo.Id', '@(equipo.Nombre ?? "Equipo")')" 
+                                        @(puedeReservar ? "" : "disabled")>
+                                    Reservar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px; color: #999;">
+                            @if (!string.IsNullOrWhiteSpace(buscar))
+                            {
+                                <text>No se encontraron equipos que coincidan con la búsqueda</text>
+                            }
+                            else
+                            {
+                                <text>No hay equipos disponibles</text>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        function reservarEquipo(equipoId, equipoNombre) {
+            // Crear un formulario modal para fecha/hora
+            var modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center;';
+            
+            var formDiv = document.createElement('div');
+            formDiv.style.cssText = 'background: white; padding: 30px; border-radius: 8px; max-width: 500px; width: 90%;';
+            
+            var now = new Date();
+            var inicioDefault = now.toISOString().slice(0, 16);
+            var finDefault = new Date(now.getTime() + 6 * 60 * 60 * 1000).toISOString().slice(0, 16);
+            
+            formDiv.innerHTML = `
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">Reservar ${equipoNombre}</h3>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Descripción (opcional):</label>
+                    <input type="text" id="descripcion" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" />
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Fecha/Hora Inicio *:</label>
+                    <input type="datetime-local" id="fechaHoraInicio" value="${inicioDefault}" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required />
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Fecha/Hora Fin * (máximo 6 horas):</label>
+                    <input type="datetime-local" id="fechaHoraFin" value="${finDefault}" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required />
+                    <small style="color: #666;">El tiempo máximo de reserva es de 6 horas</small>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" onclick="document.body.removeChild(this.closest('div'))" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancelar</button>
+                    <button type="button" onclick="confirmarReserva('${equipoId}', '${equipoNombre}')" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Reservar</button>
+                </div>
+            `;
+            
+            modal.appendChild(formDiv);
+            document.body.appendChild(modal);
+            
+            window.confirmarReserva = function(equipoId, equipoNombre) {
+                var descripcion = document.getElementById('descripcion').value;
+                var fechaHoraInicio = document.getElementById('fechaHoraInicio').value;
+                var fechaHoraFin = document.getElementById('fechaHoraFin').value;
+                
+                if (!fechaHoraInicio || !fechaHoraFin) {
+                    alert('Debe ingresar fecha/hora de inicio y fin');
+                    return;
+                }
+                
+                var inicio = new Date(fechaHoraInicio);
+                var fin = new Date(fechaHoraFin);
+                var horas = (fin - inicio) / (1000 * 60 * 60);
+                
+                if (horas > 6) {
+                    alert('El tiempo máximo de reserva es de 6 horas');
+                    return;
+                }
+                
+                if (fin <= inicio) {
+                    alert('La fecha/hora de fin debe ser posterior a la de inicio');
+                    return;
+                }
+                
+                $.ajax({
+                    url: '@Url.Action("ReservarEquipo", "Student")',
+                    method: 'POST',
+                    data: {
+                        equipoId: equipoId,
+                        descripcion: descripcion || 'Reserva de ' + equipoNombre,
+                        fechaHoraInicio: fechaHoraInicio,
+                        fechaHoraFin: fechaHoraFin,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        document.body.removeChild(modal);
+                        if (response.success) {
+                            alert('Reserva realizada correctamente');
+                            location.reload();
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        document.body.removeChild(modal);
+                        alert('Error al realizar la reserva');
+                    }
+                });
+            };
+        }
+    </script>
+}
+

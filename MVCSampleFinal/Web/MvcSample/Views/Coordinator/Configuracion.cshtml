@@ -1,0 +1,46 @@
+@model Domain.Usuario
+@{
+    ViewData["Title"] = "Configuración";
+    Layout = "~/Views/Shared/_CoordinatorLayout.cshtml";
+}
+
+<h2 class="page-title">Configuración</h2>
+
+<div style="max-width: 600px;">
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <h3 style="color: #2c3e50; margin-bottom: 20px;">Información del Perfil</h3>
+        
+        @if (Model != null)
+        {
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Nombre:</label>
+                <div style="padding: 10px; background: white; border: 1px solid #ddd; border-radius: 4px;">
+                    @Model.Nombre
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Correo Electrónico:</label>
+                <div style="padding: 10px; background: white; border: 1px solid #ddd; border-radius: 4px;">
+                    @Model.Correo
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Rol:</label>
+                <div style="padding: 10px; background: white; border: 1px solid #ddd; border-radius: 4px;">
+                    @Model.Rol
+                </div>
+            </div>
+        }
+        else
+        {
+            <p style="color: #999;">No se pudo cargar la información del usuario.</p>
+        }
+    </div>
+
+    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+        <strong>Nota:</strong> Para modificar su información de contacto, por favor contacte al administrador del sistema.
+    </div>
+</div>
+

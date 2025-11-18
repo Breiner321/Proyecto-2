@@ -3,35 +3,10 @@
   "WorkspaceRootPath": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Web\\MvcSample\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\domain\\domain\\solicitud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\infrastructure\\infrastructure\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\domain\\domain\\sala.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Repositories\\IFarmRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\web\\mvcsample\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\domain\\domain\\equipo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\domain\\domain\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\infrastructure\\infrastructure\\migrations\\20251118040208_021.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\infrastructure\\infrastructure\\migrations\\20251118034555_019.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\infrastructure\\infrastructure\\migrations\\20251118035649_020.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118220253_022.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,8 +15,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 131,
-          "SelectedChildIndex": 6,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -61,123 +36,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "20251118034555_019.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs",
-              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs",
-              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T03:45:55.788Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20251118033204_019.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs",
-              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs",
-              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T03:32:05.125Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Solicitud.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Solicitud.cs",
-              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Solicitud.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Solicitud.cs",
-              "RelativeToolTip": "..\\..\\Domain\\Domain\\Solicitud.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\AppDbContext.cs",
+              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\AppDbContext.cs*",
+              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\AppDbContext.cs*",
+              "ViewState": "AgIAABYAAAAAAAAAAAA/wCgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T17:30:36.611Z",
+              "WhenOpened": "2025-11-18T22:11:14.999Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "20251118040208_021.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T04:02:09.161Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "20251118035649_020.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs",
-              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs",
-              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs",
+              "DocumentIndex": 1,
+              "Title": "20251118220253_022.cs",
+              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118220253_022.cs",
+              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118220253_022.cs",
+              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118220253_022.cs",
+              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118220253_022.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T03:56:49.509Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IFarmRepository.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Repositories\\IFarmRepository.cs",
-              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Repositories\\IFarmRepository.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Repositories\\IFarmRepository.cs",
-              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Repositories\\IFarmRepository.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-15T01:39:26.707Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Web\\MvcSample\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Web\\MvcSample\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAArwDkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T23:43:06.615Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Sala.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Sala.cs",
-              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Sala.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Sala.cs",
-              "RelativeToolTip": "..\\..\\Domain\\Domain\\Sala.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:04:23.852Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Equipo.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Equipo.cs",
-              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Equipo.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Equipo.cs",
-              "RelativeToolTip": "..\\..\\Domain\\Domain\\Equipo.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:03:32.395Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Usuario.cs",
-              "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Usuario.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Usuario.cs",
-              "RelativeToolTip": "..\\..\\Domain\\Domain\\Usuario.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T17:30:14.127Z"
+              "WhenOpened": "2025-11-18T22:02:53.924Z",
+              "EditorCaption": ""
             }
           ]
         }

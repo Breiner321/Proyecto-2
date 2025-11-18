@@ -1,0 +1,52 @@
+@model Domain.Sala
+@{
+    ViewData["Title"] = "Eliminar Sala";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="page-title">Eliminar Sala</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+        @TempData["Error"]
+    </div>
+}
+
+<div style="max-width: 600px;">
+    <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
+        <strong>¿Está seguro de que desea eliminar esta sala?</strong>
+        <p style="margin: 10px 0 0 0; color: #856404;">Esta acción no se puede deshacer.</p>
+    </div>
+
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0;">Información de la Sala</h3>
+        <dl>
+            <dt style="font-weight: 600; margin-top: 10px;">Número:</dt>
+            <dd>Sala @Model.Numero</dd>
+
+            <dt style="font-weight: 600; margin-top: 10px;">Ubicación:</dt>
+            <dd>@Model.Ubicacion</dd>
+
+            <dt style="font-weight: 600; margin-top: 10px;">Capacidad:</dt>
+            <dd>@Model.Capacidad personas</dd>
+
+            <dt style="font-weight: 600; margin-top: 10px;">Estado:</dt>
+            <dd>@(string.IsNullOrEmpty(Model.Estado) ? "Disponible" : Model.Estado)</dd>
+
+            <dt style="font-weight: 600; margin-top: 10px;">Equipos asociados:</dt>
+            <dd>@(Model.Equipos?.Count ?? 0)</dd>
+        </dl>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn-eliminar" style="border: none; cursor: pointer; padding: 10px 20px;">Eliminar</button>
+            <a asp-action="Index" style="padding: 10px 20px; background: #6c757d; color: white; border-radius: 6px; text-decoration: none; display: inline-block;">Cancelar</a>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,275 @@
+@{
+    ViewData["Title"] = "Solicitudes";
+    Layout = "~/Views/Shared/_CoordinatorLayout.cshtml";
+    var solicitudesSala = ViewBag.SolicitudesSala as List<Domain.Solicitud> ?? new List<Domain.Solicitud>();
+    var solicitudesEquipo = ViewBag.SolicitudesEquipo as List<Domain.SolicitudEquipo> ?? new List<Domain.SolicitudEquipo>();
+}
+
+<h2 class="page-title">Solicitudes</h2>
+
+<div class="search-bar">
+    <div class="search-input-wrapper">
+        <form method="get" action="@Url.Action("Solicitudes", "Coordinator")" style="display: flex; gap: 10px;">
+            <input type="text" name="buscar" class="search-input" placeholder="Buscar solicitudes..." value="@ViewBag.Buscar" />
+            <button type="submit" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                <span class="search-icon">🔍</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div style="margin-bottom: 30px;">
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Solicitudes de Salas</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Solicitante</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (solicitudesSala.Any())
+                {
+                    @foreach (var solicitud in solicitudesSala)
+                    {
+                        var estadoClass = solicitud.Estado switch
+                        {
+                            "Aprobada" => "status-libre",
+                            "Rechazada" => "status-bloqueado",
+                            _ => "status-asignado"
+                        };
+
+                        <tr>
+                            <td>@solicitud.Id.ToString().Substring(0, 8)...</td>
+                            <td>@solicitud.Descripcion</td>
+                            <td>@solicitud.Solicitante</td>
+                            <td>@solicitud.Fecha.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <span class="status-badge @estadoClass">
+                                    @solicitud.Estado
+                                </span>
+                            </td>
+                            <td>@(solicitud.Usuario?.Nombre ?? "N/A")</td>
+                            <td>
+                                @if (solicitud.Estado == "Pendiente")
+                                {
+                                    <div style="display: flex; gap: 5px;">
+                                        <button class="btn-approve" onclick="aprobarSolicitudSala('@solicitud.Id')" style="padding: 5px 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                            Aprobar
+                                        </button>
+                                        <button class="btn-reject" onclick="rechazarSolicitudSala('@solicitud.Id')" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                            Rechazar
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span style="color: #999; font-size: 12px;">-</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 40px; color: #999;">
+                            No hay solicitudes de salas
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Solicitudes de Equipos</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Solicitante</th>
+                    <th>Equipo</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (solicitudesEquipo.Any())
+                {
+                    @foreach (var solicitud in solicitudesEquipo)
+                    {
+                        var estadoClass = solicitud.Estado switch
+                        {
+                            "Aprobada" => "status-libre",
+                            "Rechazada" => "status-bloqueado",
+                            _ => "status-asignado"
+                        };
+
+                        <tr>
+                            <td>@solicitud.Id.ToString().Substring(0, 8)...</td>
+                            <td>@solicitud.Descripcion</td>
+                            <td>@solicitud.Solicitante</td>
+                            <td>@(solicitud.Equipo?.Nombre ?? "N/A")</td>
+                            <td>@solicitud.Fecha.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <span class="status-badge @estadoClass">
+                                    @solicitud.Estado
+                                </span>
+                            </td>
+                            <td>@(solicitud.Usuario?.Nombre ?? "N/A")</td>
+                            <td>
+                                @if (solicitud.Estado == "Pendiente")
+                                {
+                                    <div style="display: flex; gap: 5px;">
+                                        <button class="btn-approve" onclick="aprobarSolicitudEquipo('@solicitud.Id')" style="padding: 5px 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                            Aprobar
+                                        </button>
+                                        <button class="btn-reject" onclick="rechazarSolicitudEquipo('@solicitud.Id')" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                            Rechazar
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span style="color: #999; font-size: 12px;">-</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px; color: #999;">
+                            No hay solicitudes de equipos
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        function aprobarSolicitudSala(solicitudId) {
+            if (!confirm('¿Está seguro de que desea aprobar esta solicitud?')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("AprobarSolicitudSala", "Coordinator")',
+                method: 'POST',
+                data: {
+                    solicitudId: solicitudId,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Solicitud aprobada correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al procesar la solicitud');
+                }
+            });
+        }
+
+        function rechazarSolicitudSala(solicitudId) {
+            if (!confirm('¿Está seguro de que desea rechazar esta solicitud?')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("RechazarSolicitudSala", "Coordinator")',
+                method: 'POST',
+                data: {
+                    solicitudId: solicitudId,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Solicitud rechazada correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al procesar la solicitud');
+                }
+            });
+        }
+
+        function aprobarSolicitudEquipo(solicitudId) {
+            if (!confirm('¿Está seguro de que desea aprobar esta solicitud?')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("AprobarSolicitudEquipo", "Coordinator")',
+                method: 'POST',
+                data: {
+                    solicitudId: solicitudId,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Solicitud aprobada correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al procesar la solicitud');
+                }
+            });
+        }
+
+        function rechazarSolicitudEquipo(solicitudId) {
+            if (!confirm('¿Está seguro de que desea rechazar esta solicitud?')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("RechazarSolicitudEquipo", "Coordinator")',
+                method: 'POST',
+                data: {
+                    solicitudId: solicitudId,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Solicitud rechazada correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al procesar la solicitud');
+                }
+            });
+        }
+    </script>
+}
+

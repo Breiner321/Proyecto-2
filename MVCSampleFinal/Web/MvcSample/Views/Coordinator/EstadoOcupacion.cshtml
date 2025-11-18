@@ -1,0 +1,68 @@
+@model List<Domain.Sala>
+@{
+    ViewData["Title"] = "Estado de Ocupación";
+    Layout = "~/Views/Shared/_CoordinatorLayout.cshtml";
+}
+
+<h2 class="page-title">Estado de Ocupación</h2>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Sala</th>
+                <th>Ubicación</th>
+                <th>Capacidad</th>
+                <th>Estado</th>
+                <th>Equipos Totales</th>
+                <th>Equipos Disponibles</th>
+                <th>Equipos Ocupados</th>
+                <th>Ocupación</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var sala in Model)
+                {
+                    var equiposTotales = sala.Equipos?.Count ?? 0;
+                    var equiposDisponibles = sala.Equipos?.Count(e => e.Disponible) ?? 0;
+                    var equiposOcupados = equiposTotales - equiposDisponibles;
+                    var porcentajeOcupacion = equiposTotales > 0 ? (equiposOcupados * 100 / equiposTotales) : 0;
+                    var estadoSala = sala.Estado ?? "Disponible";
+
+                    <tr>
+                        <td><strong>Sala @sala.Numero</strong></td>
+                        <td>@sala.Ubicacion</td>
+                        <td>@sala.Capacidad personas</td>
+                        <td>
+                            <span class="status-badge @(estadoSala == "Disponible" ? "status-libre" : estadoSala == "Ocupada" ? "status-asignado" : "status-bloqueado")">
+                                @estadoSala
+                            </span>
+                        </td>
+                        <td>@equiposTotales</td>
+                        <td>@equiposDisponibles</td>
+                        <td>@equiposOcupados</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="flex: 1; background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                                    <div style="background: @(porcentajeOcupacion > 80 ? "#dc3545" : porcentajeOcupacion > 50 ? "#ffc107" : "#28a745"); height: 100%; width: @porcentajeOcupacion%; transition: width 0.3s;"></div>
+                                </div>
+                                <span>@porcentajeOcupacion%</span>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" style="text-align: center; padding: 40px; color: #999;">
+                        No hay salas registradas
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

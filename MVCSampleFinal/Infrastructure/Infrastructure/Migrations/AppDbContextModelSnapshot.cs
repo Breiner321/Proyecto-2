@@ -96,6 +96,12 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("FechaHoraFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaHoraInicio")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("SalaId")
                         .HasColumnType("uniqueidentifier");
 
@@ -133,6 +139,12 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaHoraFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaHoraInicio")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Solicitante")

@@ -1,0 +1,271 @@
+@{
+    ViewData["Title"] = "Reservar Sala";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var equipos = ViewBag.Equipos as List<Domain.Equipo> ?? new List<Domain.Equipo>();
+    var salasLibres = ViewBag.SalasLibres as List<Domain.Sala> ?? new List<Domain.Sala>();
+    var salaSeleccionada = ViewBag.SalaSeleccionada as string ?? "A";
+    var buscar = ViewBag.Buscar as string ?? "";
+    var fecha = ViewBag.Fecha as string ?? "";
+    var hora = ViewBag.Hora as string ?? "";
+}
+
+<div class="search-filter-section">
+    <input type="text" class="search-input" placeholder="Buscar Sala" value="@buscar" id="buscarInput" />
+    <select class="filter-select" id="fechaSelect">
+        <option value="">Fecha</option>
+        @if (fecha == "hoy")
+        {
+            <option value="hoy" selected>Hoy</option>
+        }
+        else
+        {
+            <option value="hoy">Hoy</option>
+        }
+        @if (fecha == "mañana")
+        {
+            <option value="mañana" selected>Mañana</option>
+        }
+        else
+        {
+            <option value="mañana">Mañana</option>
+        }
+        @if (fecha == "semana")
+        {
+            <option value="semana" selected>Esta Semana</option>
+        }
+        else
+        {
+            <option value="semana">Esta Semana</option>
+        }
+    </select>
+    <select class="filter-select" id="horaSelect">
+        <option value="">Hora</option>
+        @if (hora == "manana")
+        {
+            <option value="manana" selected>Mañana</option>
+        }
+        else
+        {
+            <option value="manana">Mañana</option>
+        }
+        @if (hora == "tarde")
+        {
+            <option value="tarde" selected>Tarde</option>
+        }
+        else
+        {
+            <option value="tarde">Tarde</option>
+        }
+        @if (hora == "noche")
+        {
+            <option value="noche" selected>Noche</option>
+        }
+        else
+        {
+            <option value="noche">Noche</option>
+        }
+    </select>
+</div>
+
+<div class="content-panels">
+    <div class="panel">
+        <h3 class="panel-title">Sala @salaSeleccionada Reserva de Equipos</h3>
+        <table class="equipment-table">
+            <thead>
+                <tr>
+                    <th>Equipos</th>
+                    <th>Estado</th>
+                    <th>Ubicación</th>
+                    <th>Reserva</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (equipos.Any())
+                {
+                    @foreach (var equipo in equipos)
+                    {
+                        var estado = equipo.Estado ?? "Libre";
+                        var estadoClass = estado switch
+                        {
+                            "Asignado" => "status-asignado",
+                            "Bloqueado" => "status-bloqueado",
+                            _ => "status-libre"
+                        };
+                        var puedeReservar = equipo.Disponible && estado != "Bloqueado";
+
+                        <tr>
+                            <td>@(equipo.Nombre ?? "Sin nombre")</td>
+                            <td>
+                                <span class="status-badge @estadoClass">@estado</span>
+                            </td>
+                            <td>@equipo.Ubicacion</td>
+                            <td>
+                                <button class="btn-reservar" 
+                                        onclick="reservarEquipo('@equipo.Id', '@(equipo.Nombre ?? "Equipo")')" 
+                                        @(puedeReservar ? "" : "disabled")>
+                                    Reservar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" style="text-align: center; padding: 40px; color: #999;">
+                            No hay equipos disponibles en esta sala
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel">
+        <h3 class="panel-title">Salas Libres</h3>
+        @if (salasLibres.Any())
+        {
+            @foreach (var sala in salasLibres)
+            {
+                <div class="room-card">
+                    <div>
+                        <div class="room-name">Sala @sala.Numero @sala.Ubicacion</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                            Capacidad: @sala.Capacidad personas
+                        </div>
+                    </div>
+                    <button class="btn-reservar" onclick="reservarSala('@sala.Id', 'Sala @sala.Numero')">
+                        Reservar
+                    </button>
+                </div>
+            }
+        }
+        else
+        {
+            <div style="text-align: center; padding: 40px; color: #999;">
+                No hay salas libres disponibles
+            </div>
+        }
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        function reservarEquipo(equipoId, equipoNombre) {
+            var descripcion = prompt('Ingrese una descripción para la reserva (opcional):');
+            if (descripcion === null) return;
+
+            $.ajax({
+                url: '@Url.Action("ReservarEquipo", "Student")',
+                method: 'POST',
+                data: {
+                    equipoId: equipoId,
+                    descripcion: descripcion || 'Reserva de ' + equipoNombre,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Reserva realizada correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al realizar la reserva');
+                }
+            });
+        }
+
+        function reservarSala(salaId, salaNombre) {
+            // Crear un formulario modal para fecha/hora
+            var modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center;';
+            
+            var formDiv = document.createElement('div');
+            formDiv.style.cssText = 'background: white; padding: 30px; border-radius: 8px; max-width: 500px; width: 90%;';
+            
+            var now = new Date();
+            var inicioDefault = now.toISOString().slice(0, 16);
+            var finDefault = new Date(now.getTime() + 6 * 60 * 60 * 1000).toISOString().slice(0, 16);
+            
+            formDiv.innerHTML = `
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">Reservar ${salaNombre}</h3>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Descripción (opcional):</label>
+                    <input type="text" id="descripcionSala" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" />
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Fecha/Hora Inicio *:</label>
+                    <input type="datetime-local" id="fechaHoraInicioSala" value="${inicioDefault}" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required />
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Fecha/Hora Fin * (máximo 6 horas):</label>
+                    <input type="datetime-local" id="fechaHoraFinSala" value="${finDefault}" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required />
+                    <small style="color: #666;">El tiempo máximo de reserva es de 6 horas</small>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" onclick="document.body.removeChild(this.closest('div'))" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancelar</button>
+                    <button type="button" onclick="confirmarReservaSala('${salaId}', '${salaNombre}')" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Reservar</button>
+                </div>
+            `;
+            
+            modal.appendChild(formDiv);
+            document.body.appendChild(modal);
+            
+            window.confirmarReservaSala = function(salaId, salaNombre) {
+                var descripcion = document.getElementById('descripcionSala').value;
+                var fechaHoraInicio = document.getElementById('fechaHoraInicioSala').value;
+                var fechaHoraFin = document.getElementById('fechaHoraFinSala').value;
+                
+                if (!fechaHoraInicio || !fechaHoraFin) {
+                    alert('Debe ingresar fecha/hora de inicio y fin');
+                    return;
+                }
+                
+                var inicio = new Date(fechaHoraInicio);
+                var fin = new Date(fechaHoraFin);
+                var horas = (fin - inicio) / (1000 * 60 * 60);
+                
+                if (horas > 6) {
+                    alert('El tiempo máximo de reserva es de 6 horas');
+                    return;
+                }
+                
+                if (fin <= inicio) {
+                    alert('La fecha/hora de fin debe ser posterior a la de inicio');
+                    return;
+                }
+                
+                $.ajax({
+                    url: '@Url.Action("ReservarSala", "Student")',
+                    method: 'POST',
+                    data: {
+                        salaId: salaId,
+                        descripcion: descripcion || 'Reserva de ' + salaNombre,
+                        fechaHoraInicio: fechaHoraInicio,
+                        fechaHoraFin: fechaHoraFin,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        document.body.removeChild(modal);
+                        if (response.success) {
+                            alert('Reserva realizada correctamente');
+                            location.reload();
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        document.body.removeChild(modal);
+                        alert('Error al realizar la reserva');
+                    }
+                });
+            };
+        }
+
+    </script>
+}
+
