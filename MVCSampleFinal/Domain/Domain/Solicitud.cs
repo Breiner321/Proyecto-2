@@ -23,7 +23,9 @@ namespace Domain
         public Guid UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public Guid SalaId { get; set; }
-        public Sala Sala { get; set; }
+        // Relación removida para evitar ciclo de cascada
+        // Acceder a la Sala a través de consultas manuales si es necesario
+        // public Sala Sala { get; set; }
     }
 
 }

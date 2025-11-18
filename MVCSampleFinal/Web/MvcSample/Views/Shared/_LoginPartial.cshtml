@@ -1,14 +1,31 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
 <ul class="navbar-nav">
+    @{
+        var usuarioNombre = HttpContextAccessor.HttpContext?.Session.GetString("UsuarioNombre");
+        var usuarioRol = HttpContextAccessor.HttpContext?.Session.GetString("UsuarioRol");
+    }
 
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-
-
+    @if (usuarioNombre != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="#" title="Usuario">Hola, @usuarioNombre (@usuarioRol)</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-action="Logout" asp-controller="Auth" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="nav-link btn btn-link text-dark">Cerrar Sesión</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-action="Login" asp-controller="Auth">Iniciar Sesión</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-action="Registro" asp-controller="Auth">Registrarse</a>
+        </li>
+    }
 </ul>

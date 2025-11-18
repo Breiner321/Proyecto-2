@@ -19,6 +19,19 @@ namespace Infrastructure
         public DbSet<Equipo> Equipos { get; set; }
         public DbSet<Solicitud> Solicitudes { get; set; }
         public DbSet<SolicitudEquipo> SolicitudesEquipo { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configurar la relación Solicitud -> Sala sin navegación para evitar ciclos de cascada
+            // La FK se mantiene pero sin propiedad de navegación, y con NoAction para evitar el ciclo
+            modelBuilder.Entity<Solicitud>()
+                .HasOne<Sala>()
+                .WithMany()
+                .HasForeignKey(s => s.SalaId)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
     }
 
 }

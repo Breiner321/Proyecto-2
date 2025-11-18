@@ -30,6 +30,18 @@ namespace MvcSample
             }));
 
             builder.Services.AddControllersWithViews();
+            
+            // Configurar sesiones para autenticación
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            
+            // Agregar HttpContextAccessor para acceso a sesión en vistas
+            builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();
 
@@ -49,6 +61,9 @@ namespace MvcSample
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            // Usar sesiones antes de autorización
+            app.UseSession();
 
             app.UseAuthorization();
             app.UseCors("CORS_Policy");
@@ -57,7 +72,7 @@ namespace MvcSample
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Auth}/{action=Login}/{id?}");
             //app.MapRazorPages();
 
             app.Run();

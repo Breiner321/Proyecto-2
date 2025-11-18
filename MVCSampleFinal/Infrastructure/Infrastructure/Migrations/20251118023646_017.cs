@@ -142,7 +142,7 @@ namespace Infrastructure.Migrations
                 column: "SalaId",
                 principalTable: "Salas",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Solicitudes_Usuarios_UsuarioId",
@@ -259,7 +259,7 @@ namespace Infrastructure.Migrations
                 column: "SalaId",
                 principalTable: "Sala",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Solicitud_Usuarios_UsuarioId",

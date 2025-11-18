@@ -90,7 +90,7 @@ namespace Infrastructure.Migrations
                         column: x => x.SalaId,
                         principalTable: "Sala",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Solicitud_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,

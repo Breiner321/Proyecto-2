@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain;
-using Infrastructure;  // para AppDbContext
+using Infrastructure;
+using MvcSample.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCSampleFinal.Controllers
 {
@@ -9,71 +11,143 @@ namespace MVCSampleFinal.Controllers
     {
         private readonly AppDbContext _context;
 
-        // El contexto llega por inyección de dependencias
         public AuthController(AppDbContext context)
         {
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Login()
+        {
+            // Si ya está autenticado, redirigir al home
+            if (HttpContext.Session.GetString("UsuarioId") != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.Nombre == model.Usuario && u.Contraseña == model.Contraseña);
+
+            if (usuario == null)
+            {
+                ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
+                return View(model);
+            }
+
+            // Guardar información en sesión
+            HttpContext.Session.SetString("UsuarioId", usuario.Id.ToString());
+            HttpContext.Session.SetString("UsuarioNombre", usuario.Nombre);
+            HttpContext.Session.SetString("UsuarioRol", usuario.Rol ?? "Usuario");
+            HttpContext.Session.SetString("UsuarioCorreo", usuario.Correo ?? "");
+
+            // Si marcó recordar contraseña, guardar en cookie
+            if (model.RecordarContraseña)
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddDays(30),
+                    HttpOnly = true,
+                    IsEssential = true
+                };
+                Response.Cookies.Append("UsuarioRecordado", usuario.Nombre, cookieOptions);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Registro()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        [ValidateAntiForgeryToken]
+        public IActionResult Registro(RegistroViewModel model)
         {
-            var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.Nombre == username && u.Contraseña == password);
-
-            if (usuario == null)
+            if (!ModelState.IsValid)
             {
-                ViewBag.Error = "Usuario o contraseña incorrectos.";
-                return View();
+                return View(model);
             }
 
-            // Aquí podrías guardar info en sesión, claims, etc.
-            // HttpContext.Session.SetString("Usuario", usuario.Nombre);
-            return RedirectToAction("Index", "Home");
-        }
-
-        // 👉 NUEVO: Registro de usuario
-        [HttpPost]
-        public IActionResult Register(string newUsername, string newPassword, string confirmPassword)
-        {
-            if (string.IsNullOrWhiteSpace(newUsername) ||
-                string.IsNullOrWhiteSpace(newPassword) ||
-                string.IsNullOrWhiteSpace(confirmPassword))
+            // Verificar si el usuario ya existe
+            if (_context.Usuarios.Any(u => u.Nombre == model.Nombre))
             {
-                ViewBag.RegisterError = "Todos los campos son obligatorios.";
-                return View("Login");
+                ModelState.AddModelError("Nombre", "El nombre de usuario ya existe.");
+                return View(model);
             }
 
-            if (newPassword != confirmPassword)
+            // Verificar si el correo ya existe
+            if (_context.Usuarios.Any(u => u.Correo == model.Correo))
             {
-                ViewBag.RegisterError = "Las contraseñas no coinciden.";
-                return View("Login");
-            }
-
-            // ¿Ya existe?
-            bool existe = _context.Usuarios.Any(u => u.Nombre == newUsername);
-            if (existe)
-            {
-                ViewBag.RegisterError = "El nombre de usuario ya existe.";
-                return View("Login");
+                ModelState.AddModelError("Correo", "El correo electrónico ya está registrado.");
+                return View(model);
             }
 
             var nuevoUsuario = new Usuario
             {
-                Nombre = newUsername,
-                Contraseña = newPassword  // en real sería mejor hashearla
+                Id = Guid.NewGuid(),
+                Nombre = model.Nombre,
+                Correo = model.Correo,
+                Contraseña = model.Contraseña, // En producción, debería hashearse
+                Rol = model.Rol
             };
 
             _context.Usuarios.Add(nuevoUsuario);
-            _context.SaveChanges();  // 👉 se guarda en tu BD en la nube
+            _context.SaveChanges();
 
-            ViewBag.RegisterSuccess = "Usuario registrado correctamente. Ahora puede iniciar sesión.";
-            return View("Login");
+            TempData["RegistroExitoso"] = "Usuario registrado correctamente. Ahora puede iniciar sesión.";
+            return RedirectToAction("Login");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            Response.Cookies.Delete("UsuarioRecordado");
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public IActionResult OlvideContraseña()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult OlvideContraseña(string correo)
+        {
+            if (string.IsNullOrWhiteSpace(correo))
+            {
+                ViewBag.Error = "Por favor ingrese su correo electrónico.";
+                return View();
+            }
+
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.Correo == correo);
+            if (usuario == null)
+            {
+                // Por seguridad, no revelamos si el correo existe o no
+                ViewBag.Success = "Si el correo existe, se enviará un enlace para restablecer la contraseña.";
+                return View();
+            }
+
+            // Aquí deberías implementar el envío de correo para restablecer contraseña
+            // Por ahora, solo mostramos un mensaje
+            ViewBag.Success = "Se ha enviado un enlace a su correo electrónico para restablecer la contraseña.";
+            return View();
         }
     }
 }

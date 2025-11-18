@@ -191,10 +191,10 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Solicitud", b =>
                 {
-                    b.HasOne("Domain.Sala", "Sala")
+                    b.HasOne("Domain.Sala", null)
                         .WithMany()
                         .HasForeignKey("SalaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Domain.Usuario", "Usuario")
@@ -202,8 +202,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Sala");
 
                     b.Navigation("Usuario");
                 });
