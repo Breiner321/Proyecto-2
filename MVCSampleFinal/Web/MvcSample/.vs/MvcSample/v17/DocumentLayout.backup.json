@@ -6,15 +6,6 @@
       "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\domain\\domain\\solicitud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -32,6 +23,15 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{8AF33060-9A55-407F-8C57-3FE5AE0CBC62}|..\\..\\Domain\\Domain\\Domain.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\domain\\domain\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\infrastructure\\infrastructure\\migrations\\20251118040208_021.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\infrastructure\\infrastructure\\migrations\\20251118034555_019.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2070EAED-8793-4790-AA35-B5B37C3AA180}|..\\..\\Infrastructure\\Infrastructure\\Infrastructure.csproj|d:\\estudio\\proyecto-2\\mvcsamplefinal\\infrastructure\\infrastructure\\migrations\\20251118035649_020.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,7 +41,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 131,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -61,20 +61,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20251118040208_021.cs",
-              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T04:02:09.161Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "20251118034555_019.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs",
               "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs",
@@ -82,12 +69,11 @@
               "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118034555_019.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T03:45:55.788Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-18T03:45:55.788Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "20251118033204_019.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs",
               "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs",
@@ -95,8 +81,7 @@
               "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118033204_019.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T03:32:05.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-18T03:32:05.125Z"
             },
             {
               "$type": "Document",
@@ -113,7 +98,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
+              "Title": "20251118040208_021.cs",
+              "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
+              "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
+              "ToolTip": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
+              "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118040208_021.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T04:02:09.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "20251118035649_020.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs",
               "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs",
@@ -121,12 +118,11 @@
               "RelativeToolTip": "..\\..\\Infrastructure\\Infrastructure\\Migrations\\20251118035649_020.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T03:56:49.509Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-18T03:56:49.509Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "IFarmRepository.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Infrastructure\\Infrastructure\\Repositories\\IFarmRepository.cs",
               "RelativeDocumentMoniker": "..\\..\\Infrastructure\\Infrastructure\\Repositories\\IFarmRepository.cs",
@@ -137,7 +133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Web\\MvcSample\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -149,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "Sala.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Sala.cs",
               "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Sala.cs",
@@ -157,12 +153,11 @@
               "RelativeToolTip": "..\\..\\Domain\\Domain\\Sala.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:04:23.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T18:04:23.852Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "Equipo.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Equipo.cs",
               "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Equipo.cs",
@@ -174,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
               "Title": "Usuario.cs",
               "DocumentMoniker": "D:\\Estudio\\Proyecto-2\\MVCSampleFinal\\Domain\\Domain\\Usuario.cs",
               "RelativeDocumentMoniker": "..\\..\\Domain\\Domain\\Usuario.cs",

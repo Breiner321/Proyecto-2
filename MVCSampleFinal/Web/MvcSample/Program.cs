@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.Automapper;
+using Microsoft.Extensions.Logging;
 
 namespace MvcSample
 {
@@ -74,6 +75,23 @@ namespace MvcSample
                 name: "default",
                 pattern: "{controller=Auth}/{action=Login}/{id?}");
             //app.MapRazorPages();
+
+            // Inicializar usuario administrador si no existe
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<AppDbContext>();
+                    MvcSample.Services.AdminInitializer.InitializeAdmin(context);
+                }
+                catch (Exception ex)
+                {
+                    // Log error si es necesario
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "Error al inicializar el usuario administrador");
+                }
+            }
 
             app.Run();
         }

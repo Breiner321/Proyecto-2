@@ -1,0 +1,59 @@
+@model IEnumerable<Domain.Usuario>
+@{
+    ViewData["Title"] = "Registro de Usuarios";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="page-title">Registro de Usuarios</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-bottom: 20px;">
+        @TempData["Success"]
+    </div>
+}
+
+<div class="search-bar">
+    <div class="search-input-wrapper">
+        <form asp-action="Index" method="get" style="display: flex; gap: 10px;">
+            <input type="text" name="buscar" class="search-input" placeholder="Buscar" value="@ViewBag.Buscar" />
+            <button type="submit" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                <span class="search-icon">🔍</span>
+            </button>
+        </form>
+    </div>
+    <a asp-action="Create" class="btn-nuevo">Nuevo</a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Usuario</th>
+                <th>Correo</th>
+                <th>Contraseña</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Correo</td>
+                    <td>@item.Contraseña</td>
+                    <td>@item.Rol</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-editar">Editar</a>
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display: inline;" onsubmit="return confirm('¿Está seguro que desea eliminar este usuario?');">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn-eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

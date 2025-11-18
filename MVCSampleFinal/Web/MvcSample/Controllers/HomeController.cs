@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MvcSample.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace MvcSample.Controllers
 {
@@ -16,6 +17,13 @@ namespace MvcSample.Controllers
 
         public IActionResult Index()
         {
+            // Si es administrador, redirigir al dashboard
+            var rol = HttpContext.Session.GetString("UsuarioRol");
+            if (rol == "Administrador")
+            {
+                return RedirectToAction("Index", "Usuarios");
+            }
+
             return View();
         }
 

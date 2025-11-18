@@ -63,6 +63,12 @@ namespace MVCSampleFinal.Controllers
                 Response.Cookies.Append("UsuarioRecordado", usuario.Nombre, cookieOptions);
             }
 
+            // Redirigir según el rol
+            if (usuario.Rol == "Administrador")
+            {
+                return RedirectToAction("Index", "Usuarios");
+            }
+
             return RedirectToAction("Index", "Home");
         }
 
