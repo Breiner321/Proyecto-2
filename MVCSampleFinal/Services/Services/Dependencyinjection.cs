@@ -6,9 +6,7 @@ namespace Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-          
-            services.AddTransient<IFarmService, FarmService>();
-
+            // Servicios futuros aquí
 
             return services;
         }

@@ -1,5 +1,4 @@
-﻿using Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,7 +16,6 @@ namespace Infrastructure
 
             var c = configuration.GetConnectionString("DefaultConnection");
             //aca van los repositorios
-            services.AddScoped<IFarmRepository, FarmRepository>();
             
             services.AddDbContext<AppDbContext>(options => {
 
