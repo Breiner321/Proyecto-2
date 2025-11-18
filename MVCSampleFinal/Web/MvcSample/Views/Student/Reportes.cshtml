@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Reportes";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2 style="color: #2c3e50; margin-bottom: 25px;">Mis Reportes</h2>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Total de Reservas</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.TotalReservas</h2>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Reservas Aprobadas</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.ReservasAprobadas</h2>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Reservas Pendientes</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.ReservasPendientes</h2>
+    </div>
+</div>
+
+<div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Resumen de Actividad</h3>
+    <p style="color: #666; line-height: 1.6;">
+        Has realizado un total de <strong>@ViewBag.TotalReservas</strong> reservas, de las cuales 
+        <strong>@ViewBag.ReservasAprobadas</strong> han sido aprobadas y <strong>@ViewBag.ReservasPendientes</strong> están pendientes de aprobación.
+    </p>
+</div>
+

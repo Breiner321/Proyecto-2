@@ -47,7 +47,7 @@ namespace MvcSample.Controllers
             return View();
         }
 
-        // POST: Equipos/Create
+        // POST: Equipos/Create (Individual)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Nombre,Estado,Ubicacion,SalaId,Disponible")] Equipo equipo)
@@ -64,6 +64,11 @@ namespace MvcSample.Controllers
                 {
                     equipo.Estado = "Libre";
                 }
+                // Si no se proporciona nombre, generar ID automático
+                if (string.IsNullOrWhiteSpace(equipo.Nombre))
+                {
+                    equipo.Nombre = $"EQU-{equipo.Id.ToString().Substring(0, 8).ToUpper()}";
+                }
                 _context.Add(equipo);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -71,6 +76,55 @@ namespace MvcSample.Controllers
 
             ViewBag.Salas = new SelectList(_context.Salas.ToList(), "Id", "Numero", equipo.SalaId);
             return View(equipo);
+        }
+
+        // POST: Equipos/CreateMasivo (Creación masiva)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateMasivo(Guid salaId, string ubicacion, int cantidad, string estado = "Libre")
+        {
+            if (!IsAdministrator())
+            {
+                return Json(new { success = false, message = "No autorizado" });
+            }
+
+            if (cantidad <= 0 || cantidad > 100)
+            {
+                return Json(new { success = false, message = "La cantidad debe estar entre 1 y 100" });
+            }
+
+            var sala = _context.Salas.FirstOrDefault(s => s.Id == salaId);
+            if (sala == null)
+            {
+                return Json(new { success = false, message = "Sala no encontrada" });
+            }
+
+            try
+            {
+                var equipos = new List<Equipo>();
+                for (int i = 0; i < cantidad; i++)
+                {
+                    var equipo = new Equipo
+                    {
+                        Id = Guid.NewGuid(),
+                        SalaId = salaId,
+                        Ubicacion = ubicacion ?? sala.Ubicacion,
+                        Estado = estado ?? "Libre",
+                        Disponible = estado == "Libre",
+                        Nombre = $"EQU-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}"
+                    };
+                    equipos.Add(equipo);
+                }
+
+                _context.Equipos.AddRange(equipos);
+                _context.SaveChanges();
+
+                return Json(new { success = true, message = $"Se crearon {cantidad} equipos correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al crear equipos: " + ex.Message });
+            }
         }
 
         // GET: Equipos/Edit/5

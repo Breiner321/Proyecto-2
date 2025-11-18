@@ -31,6 +31,10 @@ namespace MVCSampleFinal.Controllers
                 {
                     return RedirectToAction("Equipos", "Coordinator");
                 }
+                else if (rol == "Estudiante" || rol == "Usuario")
+                {
+                    return RedirectToAction("ReservarSala", "Student");
+                }
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -80,6 +84,10 @@ namespace MVCSampleFinal.Controllers
             else if (usuario.Rol == "Coordinador")
             {
                 return RedirectToAction("Equipos", "Coordinator");
+            }
+            else if (usuario.Rol == "Estudiante" || usuario.Rol == "Usuario")
+            {
+                return RedirectToAction("ReservarSala", "Student");
             }
 
             return RedirectToAction("Index", "Home");

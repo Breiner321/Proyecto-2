@@ -1,0 +1,93 @@
+@{
+    ViewData["Title"] = "Mis Reservas";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var solicitudesSala = ViewBag.SolicitudesSala as List<Domain.Solicitud> ?? new List<Domain.Solicitud>();
+    var solicitudesEquipo = ViewBag.SolicitudesEquipo as List<Domain.SolicitudEquipo> ?? new List<Domain.SolicitudEquipo>();
+}
+
+<h2 style="color: #2c3e50; margin-bottom: 25px;">Mis Reservas</h2>
+
+<div style="margin-bottom: 30px;">
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Reservas de Salas</h3>
+    <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @if (solicitudesSala.Any())
+        {
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f8f9fa;">
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Descripción</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Fecha</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var solicitud in solicitudesSala)
+                    {
+                        var estadoClass = solicitud.Estado switch
+                        {
+                            "Aprobada" => "status-libre",
+                            "Rechazada" => "status-bloqueado",
+                            _ => "status-asignado"
+                        };
+
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Descripcion</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">
+                                <span class="status-badge @estadoClass">@solicitud.Estado</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p style="text-align: center; padding: 40px; color: #999;">No tienes reservas de salas</p>
+        }
+    </div>
+</div>
+
+<div>
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Reservas de Equipos</h3>
+    <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @if (solicitudesEquipo.Any())
+        {
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f8f9fa;">
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Equipo</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Descripción</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Fecha</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e0e0e0;">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var solicitud in solicitudesEquipo)
+                    {
+                        var estadoClass = solicitud.Estado switch
+                        {
+                            "Aprobada" => "status-libre",
+                            "Rechazada" => "status-bloqueado",
+                            _ => "status-asignado"
+                        };
+
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@(solicitud.Equipo?.Nombre ?? "N/A")</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Descripcion</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">@solicitud.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e9ecef;">
+                                <span class="status-badge @estadoClass">@solicitud.Estado</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p style="text-align: center; padding: 40px; color: #999;">No tienes reservas de equipos</p>
+        }
+    </div>
+</div>
+

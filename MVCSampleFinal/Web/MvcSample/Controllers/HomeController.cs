@@ -27,6 +27,10 @@ namespace MvcSample.Controllers
             {
                 return RedirectToAction("Equipos", "Coordinator");
             }
+            else if (rol == "Estudiante" || rol == "Usuario")
+            {
+                return RedirectToAction("ReservarSala", "Student");
+            }
 
             return View();
         }
