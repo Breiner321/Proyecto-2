@@ -3,7 +3,101 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="page-title">Reportes</h2>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+    <h2 class="page-title" style="margin: 0;">Reportes</h2>
+    <a href="@Url.Action("ReportesAvanzados", "Reportes")" style="padding: 10px 20px; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">
+        Reportes Avanzados
+    </a>
+</div>
 
-<p>Reportes próximamente...</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Total de Salas</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.TotalSalas</h2>
+    </div>
 
+    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Total de Equipos</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.TotalEquipos</h2>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Equipos Disponibles</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.EquiposDisponibles</h2>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Equipos Ocupados</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.EquiposOcupados</h2>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Total Solicitudes</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.TotalSolicitudes</h2>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 14px; opacity: 0.9; margin-bottom: 10px;">Solicitudes Pendientes</h3>
+        <h2 style="font-size: 36px; font-weight: bold; margin: 0;">@ViewBag.SolicitudesPendientes</h2>
+    </div>
+</div>
+
+<div class="table-container" style="margin-top: 30px;">
+    <h3 style="color: #2c3e50; margin-bottom: 15px;">Resumen de Actividad</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Métrica</th>
+                <th>Valor</th>
+                <th>Porcentaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Disponibilidad de Equipos</td>
+                <td>@ViewBag.EquiposDisponibles de @ViewBag.TotalEquipos</td>
+                <td>
+                    @{
+                        var porcentajeDisponibilidad = ViewBag.TotalEquipos > 0 ? (ViewBag.EquiposDisponibles * 100 / ViewBag.TotalEquipos) : 0;
+                    }
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="flex: 1; background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #28a745; height: 100%; width: @porcentajeDisponibilidad%;"></div>
+                        </div>
+                        <span>@porcentajeDisponibilidad%</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Ocupación de Equipos</td>
+                <td>@ViewBag.EquiposOcupados de @ViewBag.TotalEquipos</td>
+                <td>
+                    @{
+                        var porcentajeOcupacion = ViewBag.TotalEquipos > 0 ? (ViewBag.EquiposOcupados * 100 / ViewBag.TotalEquipos) : 0;
+                    }
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="flex: 1; background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #ffc107; height: 100%; width: @porcentajeOcupacion%;"></div>
+                        </div>
+                        <span>@porcentajeOcupacion%</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Solicitudes Pendientes</td>
+                <td>@ViewBag.SolicitudesPendientes de @ViewBag.TotalSolicitudes</td>
+                <td>
+                    @{
+                        var porcentajePendientes = ViewBag.TotalSolicitudes > 0 ? (ViewBag.SolicitudesPendientes * 100 / ViewBag.TotalSolicitudes) : 0;
+                    }
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="flex: 1; background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #dc3545; height: 100%; width: @porcentajePendientes%;"></div>
+                        </div>
+                        <span>@porcentajePendientes%</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

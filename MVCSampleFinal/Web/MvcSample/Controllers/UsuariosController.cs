@@ -4,6 +4,7 @@ using Infrastructure;
 using MvcSample.Models;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace MvcSample.Controllers
 {

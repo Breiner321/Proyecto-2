@@ -1,0 +1,346 @@
+@using System.Linq
+@{
+    ViewData["Title"] = "Reportes Avanzados";
+    Layout = "~/Views/Shared/_CoordinatorLayout.cshtml";
+    var tipo = ViewBag.Tipo as string ?? "diario";
+    var fechaInicio = ViewBag.FechaInicio as DateTime? ?? DateTime.Now;
+    var salaId = ViewBag.SalaId as Guid?;
+    var salas = ViewBag.Salas as List<Domain.Sala> ?? new List<Domain.Sala>();
+    var reporteData = ViewBag.ReporteData as List<dynamic> ?? new List<dynamic>();
+}
+
+<style>
+    .filters-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .filter-group {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .filter-group label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-right: 5px;
+    }
+
+    .filter-group select,
+    .filter-group input {
+        padding: 8px 12px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .btn-filter {
+        padding: 8px 20px;
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .btn-filter:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+    }
+
+    .reporte-card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .reporte-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .reporte-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .reservas-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .reservas-table th {
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+        color: #2c3e50;
+        border-bottom: 2px solid #e0e0e0;
+        background-color: #f8f9fa;
+    }
+
+    .reservas-table td {
+        padding: 12px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .reservas-table tr:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+
+<div class="filters-section">
+    <div class="filter-group">
+        <label>Tipo de Reporte:</label>
+        <select id="tipoReporte">
+            @if (tipo == "diario")
+            {
+                <option value="diario" selected>Diario</option>
+            }
+            else
+            {
+                <option value="diario">Diario</option>
+            }
+            @if (tipo == "semanal")
+            {
+                <option value="semanal" selected>Semanal</option>
+            }
+            else
+            {
+                <option value="semanal">Semanal</option>
+            }
+            @if (tipo == "mensual")
+            {
+                <option value="mensual" selected>Mensual</option>
+            }
+            else
+            {
+                <option value="mensual">Mensual</option>
+            }
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>Fecha:</label>
+        <input type="date" id="fechaConsulta" value="@fechaInicio.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="filter-group">
+        <label>Sala:</label>
+        <select id="salaFiltro">
+            <option value="">Todas las Salas</option>
+            @foreach (var sala in salas)
+            {
+                @if (salaId.HasValue && salaId.Value == sala.Id)
+                {
+                    <option value="@sala.Id" selected>Sala @sala.Numero</option>
+                }
+                else
+                {
+                    <option value="@sala.Id">Sala @sala.Numero</option>
+                }
+            }
+        </select>
+    </div>
+    <button class="btn-filter" onclick="aplicarFiltros()">Aplicar Filtros</button>
+</div>
+
+@if (reporteData.Any())
+{
+    @foreach (var reporte in reporteData)
+    {
+        <div class="reporte-card">
+            <div class="reporte-header">
+                <div>
+                    <div class="reporte-title">Sala @reporte.Sala.Numero</div>
+                    <div style="font-size: 14px; color: #666; margin-top: 5px;">
+                        @reporte.FechaInicio.ToString("dd/MM/yyyy") - @reporte.FechaFin.ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Reservas de Sala</div>
+                    <div class="stat-value">@reporte.TotalReservasSala</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Reservas de Equipos</div>
+                    <div class="stat-value">@reporte.TotalReservasEquipos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Aprobadas</div>
+                    <div class="stat-value" style="color: #28a745;">@reporte.ReservasAprobadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Pendientes</div>
+                    <div class="stat-value" style="color: #ffc107;">@reporte.ReservasPendientes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Finalizadas</div>
+                    <div class="stat-value" style="color: #6c757d;">@reporte.ReservasFinalizadas</div>
+                </div>
+            </div>
+
+            @{
+                var reservasSalaList = reporte.ReservasSala as System.Collections.IEnumerable ?? new List<object>();
+                var reservasEquiposList = reporte.ReservasEquipos as System.Collections.IEnumerable ?? new List<object>();
+                var reservasSalaCount = reservasSalaList.Cast<object>().Count();
+                var reservasEquiposCount = reservasEquiposList.Cast<object>().Count();
+            }
+            
+            @if (reservasSalaCount > 0 || reservasEquiposCount > 0)
+            {
+                <h4 style="margin-top: 20px; color: #2c3e50;">Detalle de Reservas</h4>
+                
+                @if (reservasSalaCount > 0)
+                {
+                    <h5 style="margin-top: 15px; color: #666;">Reservas de Sala</h5>
+                    <table class="reservas-table">
+                        <thead>
+                            <tr>
+                                <th>Solicitante</th>
+                                <th>Descripción</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var reserva in reservasSalaList.Cast<dynamic>())
+                            {
+                                <tr>
+                                    <td>@reserva.Solicitante</td>
+                                    <td>@reserva.Descripcion</td>
+                                    <td>@(reserva.FechaHoraInicio?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+                                    <td>@(reserva.FechaHoraFin?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+                                    <td>
+                                        @{
+                                            var estadoClass = reserva.Estado switch
+                                            {
+                                                "Aprobada" => "status-libre",
+                                                "Rechazada" => "status-bloqueado",
+                                                _ => "status-asignado"
+                                            };
+                                        }
+                                        <span class="status-badge @estadoClass">@reserva.Estado</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+                @if (reservasEquiposCount > 0)
+                {
+                    <h5 style="margin-top: 15px; color: #666;">Reservas de Equipos</h5>
+                    <table class="reservas-table">
+                        <thead>
+                            <tr>
+                                <th>Solicitante</th>
+                                <th>Equipo</th>
+                                <th>Descripción</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var reserva in reservasEquiposList.Cast<dynamic>())
+                            {
+                                <tr>
+                                    <td>@reserva.Solicitante</td>
+                                    <td>@(reserva.Equipo?.Nombre ?? "N/A")</td>
+                                    <td>@reserva.Descripcion</td>
+                                    <td>@(reserva.FechaHoraInicio?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+                                    <td>@(reserva.FechaHoraFin?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+                                    <td>
+                                        @{
+                                            var estadoClass = reserva.Estado switch
+                                            {
+                                                "Aprobada" => "status-libre",
+                                                "Rechazada" => "status-bloqueado",
+                                                _ => "status-asignado"
+                                            };
+                                        }
+                                        <span class="status-badge @estadoClass">@reserva.Estado</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <p style="text-align: center; padding: 40px; color: #999;">No hay reservas en el período seleccionado</p>
+            }
+        </div>
+    }
+}
+else
+{
+    <div style="text-align: center; padding: 40px; color: #999;">
+        No hay datos para mostrar con los filtros seleccionados
+    </div>
+}
+
+@section Scripts {
+    <script>
+        function aplicarFiltros() {
+            var tipo = document.getElementById('tipoReporte').value;
+            var fecha = document.getElementById('fechaConsulta').value;
+            var sala = document.getElementById('salaFiltro').value;
+            
+            var url = '@Url.Action("ReportesAvanzados", "Coordinator")?tipo=' + tipo + '&fechaInicio=' + fecha;
+            if (sala) {
+                url += '&salaId=' + sala;
+            }
+            
+            window.location.href = url;
+        }
+    </script>
+}
+
+

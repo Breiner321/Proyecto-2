@@ -3,7 +3,12 @@
     Layout = "~/Views/Shared/_CoordinatorLayout.cshtml";
 }
 
-<h2 class="page-title">Reportes</h2>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+    <h2 class="page-title" style="margin: 0;">Reportes</h2>
+    <a href="@Url.Action("ReportesAvanzados", "Coordinator")" style="padding: 10px 20px; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">
+        Reportes Avanzados
+    </a>
+</div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
     <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">

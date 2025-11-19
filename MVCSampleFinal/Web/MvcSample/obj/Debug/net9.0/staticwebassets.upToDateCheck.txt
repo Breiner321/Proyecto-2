@@ -27,6 +27,7 @@ C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\boo
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\bootstrap\dist\css\bootstrap.css
+C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\images\README.txt
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\jquery-validation\dist\additional-methods.js
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
@@ -59,6 +60,9 @@ C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\boo
 C:\Users\Breiner\Desktop\Proyecto 2\MVCSampleFinal\Web\MvcSample\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\logo.png
+wwwroot\images\logo2.png
+wwwroot\images\README.txt
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

@@ -1,0 +1,170 @@
+@{
+    ViewData["Title"] = "Solicitar Asesoría";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<style>
+    .asesoria-form {
+        background: white;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 14px;
+    }
+
+    .form-group select,
+    .form-group textarea,
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+    }
+
+    .form-group select:focus,
+    .form-group textarea:focus,
+    .form-group input:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+    }
+
+    .info-box {
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 25px;
+    }
+
+    .info-box p {
+        margin: 0;
+        color: #1565c0;
+        font-size: 14px;
+    }
+</style>
+
+<div class="asesoria-form">
+    <h2 style="color: #2c3e50; margin-bottom: 25px;">Solicitar Asesoría Técnica</h2>
+
+    <div class="info-box">
+        <p><strong>Información:</strong> Complete el formulario para solicitar asesoría técnica. Un coordinador revisará su solicitud y la aprobará o rechazará.</p>
+    </div>
+
+    <form id="asesoriaForm">
+        <div class="form-group">
+            <label for="tipoAsesoria">Tipo de Asesoría *</label>
+            <select id="tipoAsesoria" name="tipoAsesoria" required>
+                <option value="">Seleccione un tipo</option>
+                <option value="Técnica">Asesoría Técnica General</option>
+                <option value="Equipo">Problema con Equipo</option>
+                <option value="Sala">Problema con Sala</option>
+                <option value="Software">Problema con Software</option>
+                <option value="Hardware">Problema con Hardware</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fechaHoraSolicitada">Fecha y Hora Preferida (Opcional)</label>
+            <input type="datetime-local" id="fechaHoraSolicitada" name="fechaHoraSolicitada" />
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción del Problema o Necesidad *</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Describa detalladamente el problema o la necesidad de asesoría..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Enviar Solicitud</button>
+    </form>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        document.getElementById('asesoriaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var tipoAsesoria = document.getElementById('tipoAsesoria').value;
+            var descripcion = document.getElementById('descripcion').value;
+            var fechaHoraSolicitada = document.getElementById('fechaHoraSolicitada').value;
+
+            if (!tipoAsesoria) {
+                alert('Debe seleccionar un tipo de asesoría');
+                return;
+            }
+
+            if (!descripcion.trim()) {
+                alert('Debe proporcionar una descripción');
+                return;
+            }
+
+            var fechaHora = null;
+            if (fechaHoraSolicitada) {
+                fechaHora = new Date(fechaHoraSolicitada).toISOString();
+            }
+
+            $.ajax({
+                url: '@Url.Action("SolicitarAsesoria", "Student")',
+                method: 'POST',
+                data: {
+                    tipoAsesoria: tipoAsesoria,
+                    descripcion: descripcion,
+                    fechaHoraSolicitada: fechaHora,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Solicitud de asesoría enviada correctamente');
+                        document.getElementById('asesoriaForm').reset();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al enviar la solicitud de asesoría');
+                }
+            });
+        });
+    </script>
+}
+
+

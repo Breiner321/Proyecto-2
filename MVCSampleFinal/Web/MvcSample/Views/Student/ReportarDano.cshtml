@@ -1,0 +1,222 @@
+@{
+    ViewData["Title"] = "Reportar Daño";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var salas = ViewBag.Salas as List<Domain.Sala> ?? new List<Domain.Sala>();
+    var equipos = ViewBag.Equipos as List<Domain.Equipo> ?? new List<Domain.Equipo>();
+}
+
+<style>
+    .reporte-form {
+        background: white;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 14px;
+    }
+
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+    }
+
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+    }
+
+    .info-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 25px;
+    }
+
+    .info-box p {
+        margin: 0;
+        color: #856404;
+        font-size: 14px;
+    }
+</style>
+
+<div class="reporte-form">
+    <h2 style="color: #2c3e50; margin-bottom: 25px;">Reportar Daño</h2>
+
+    <div class="info-box">
+        <p><strong>Importante:</strong> Al reportar un daño, el equipo o sala será marcado como no disponible hasta que sea revisado y reparado.</p>
+    </div>
+
+    <form id="reporteDanoForm">
+        <div class="form-group">
+            <label for="tipo">Tipo de Reporte *</label>
+            <select id="tipo" name="tipo" required onchange="actualizarOpciones()">
+                <option value="">Seleccione un tipo</option>
+                <option value="Equipo">Equipo</option>
+                <option value="Sala">Sala</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="equipoGroup" style="display: none;">
+            <label for="equipoId">Seleccionar Equipo *</label>
+            <select id="equipoId" name="equipoId">
+                <option value="">Seleccione un equipo</option>
+                @foreach (var equipo in equipos)
+                {
+                    <option value="@equipo.Id">@(equipo.Nombre ?? "Sin nombre") - Sala @(equipo.Sala?.Numero ?? "N/A")</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group" id="salaGroup" style="display: none;">
+            <label for="salaId">Seleccionar Sala *</label>
+            <select id="salaId" name="salaId">
+                <option value="">Seleccione una sala</option>
+                @foreach (var sala in salas)
+                {
+                    <option value="@sala.Id">Sala @sala.Numero - @sala.Ubicacion</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción del Daño *</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Describa detalladamente el daño encontrado..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Enviar Reporte</button>
+    </form>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        function actualizarOpciones() {
+            var tipo = document.getElementById('tipo').value;
+            var equipoGroup = document.getElementById('equipoGroup');
+            var salaGroup = document.getElementById('salaGroup');
+            var equipoSelect = document.getElementById('equipoId');
+            var salaSelect = document.getElementById('salaId');
+
+            if (tipo === 'Equipo') {
+                equipoGroup.style.display = 'block';
+                salaGroup.style.display = 'none';
+                equipoSelect.required = true;
+                salaSelect.required = false;
+                salaSelect.value = '';
+            } else if (tipo === 'Sala') {
+                equipoGroup.style.display = 'none';
+                salaGroup.style.display = 'block';
+                equipoSelect.required = false;
+                salaSelect.required = true;
+                equipoSelect.value = '';
+            } else {
+                equipoGroup.style.display = 'none';
+                salaGroup.style.display = 'none';
+                equipoSelect.required = false;
+                salaSelect.required = false;
+            }
+        }
+
+        document.getElementById('reporteDanoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var tipo = document.getElementById('tipo').value;
+            var equipoId = document.getElementById('equipoId').value;
+            var salaId = document.getElementById('salaId').value;
+            var descripcion = document.getElementById('descripcion').value;
+
+            if (!tipo) {
+                alert('Debe seleccionar un tipo de reporte');
+                return;
+            }
+
+            if (tipo === 'Equipo' && !equipoId) {
+                alert('Debe seleccionar un equipo');
+                return;
+            }
+
+            if (tipo === 'Sala' && !salaId) {
+                alert('Debe seleccionar una sala');
+                return;
+            }
+
+            if (!descripcion.trim()) {
+                alert('Debe proporcionar una descripción del daño');
+                return;
+            }
+
+            if (!confirm('¿Está seguro de enviar este reporte de daño? El equipo/sala será marcado como no disponible.')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("ReportarDano", "Student")',
+                method: 'POST',
+                data: {
+                    tipo: tipo,
+                    equipoId: equipoId || null,
+                    salaId: salaId || null,
+                    descripcion: descripcion,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Reporte de daño enviado correctamente');
+                        document.getElementById('reporteDanoForm').reset();
+                        actualizarOpciones();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al enviar el reporte de daño');
+                }
+            });
+        });
+    </script>
+}
+
+

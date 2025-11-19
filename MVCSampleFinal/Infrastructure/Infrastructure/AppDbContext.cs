@@ -19,6 +19,8 @@ namespace Infrastructure
         public DbSet<Equipo> Equipos { get; set; }
         public DbSet<Solicitud> Solicitudes { get; set; }
         public DbSet<SolicitudEquipo> SolicitudesEquipo { get; set; }
+        public DbSet<ReporteDano> ReportesDano { get; set; }
+        public DbSet<SolicitudAsesoria> SolicitudesAsesoria { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,6 +44,13 @@ namespace Infrastructure
             modelBuilder.Entity<SolicitudEquipo>()
                 .Ignore(s => s.FechaHoraInicio)
                 .Ignore(s => s.FechaHoraFin);
+
+            // Configurar ReporteDano
+            modelBuilder.Entity<ReporteDano>()
+                .HasOne<Sala>()
+                .WithMany()
+                .HasForeignKey(r => r.SalaId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 
