@@ -284,10 +284,24 @@
 <body>
     <div class="header">
         <div class="header-left">
-            <div class="logo-circle">
+            <img src="~/images/logo2.png" alt="Logo" id="logoImg" style="height: 60px; width: auto; display: block;" onerror="this.style.display='none'; document.getElementById('logoTextFallback').style.display='block';" onload="document.getElementById('logoTextFallback').style.display='none';" />
+            <div id="logoTextFallback" class="logo-circle" style="display: block;">
                 INSTITUCIONAL EN<br>Somos calidad, somos USC
             </div>
         </div>
+        <script>
+            // Verificar si el logo existe
+            var logoImg = document.getElementById('logoImg');
+            if (logoImg) {
+                logoImg.onload = function() {
+                    document.getElementById('logoTextFallback').style.display = 'none';
+                };
+                logoImg.onerror = function() {
+                    this.style.display = 'none';
+                    document.getElementById('logoTextFallback').style.display = 'block';
+                };
+            }
+        </script>
         <div class="header-right">
             <span>Perfil Estudiante</span>
             @{
@@ -308,11 +322,20 @@
         <a asp-controller="Student" asp-action="ReservarSala" class="nav-tab @(ViewContext.RouteData.Values["action"]?.ToString() == "ReservarSala" ? "active" : "")">
             Reservar Sala
         </a>
+        <a asp-controller="Student" asp-action="ReservarEquipo" class="nav-tab @(ViewContext.RouteData.Values["action"]?.ToString() == "ReservarEquipo" ? "active" : "")">
+            Reservar Equipo
+        </a>
         <a asp-controller="Student" asp-action="MisReservas" class="nav-tab @(ViewContext.RouteData.Values["action"]?.ToString() == "MisReservas" ? "active" : "")">
             Mis Reservas
         </a>
         <a asp-controller="Student" asp-action="Reportes" class="nav-tab @(ViewContext.RouteData.Values["action"]?.ToString() == "Reportes" ? "active" : "")">
             Reportes
+        </a>
+        <a asp-controller="Student" asp-action="ReportarDano" class="nav-tab @(ViewContext.RouteData.Values["action"]?.ToString() == "ReportarDano" ? "active" : "")">
+            Reportar Daño
+        </a>
+        <a asp-controller="Student" asp-action="SolicitarAsesoria" class="nav-tab @(ViewContext.RouteData.Values["action"]?.ToString() == "SolicitarAsesoria" ? "active" : "")">
+            Solicitud de Asesoría
         </a>
     </nav>
 

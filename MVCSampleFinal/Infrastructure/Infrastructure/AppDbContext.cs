@@ -31,6 +31,17 @@ namespace Infrastructure
                 .WithMany()
                 .HasForeignKey(s => s.SalaId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            // Ignorar temporalmente las propiedades FechaHoraInicio y FechaHoraFin
+            // hasta que se agreguen las columnas a la base de datos
+            // Esto permite que el código funcione incluso si las columnas no existen
+            modelBuilder.Entity<Solicitud>()
+                .Ignore(s => s.FechaHoraInicio)
+                .Ignore(s => s.FechaHoraFin);
+            
+            modelBuilder.Entity<SolicitudEquipo>()
+                .Ignore(s => s.FechaHoraInicio)
+                .Ignore(s => s.FechaHoraFin);
         }
     }
 

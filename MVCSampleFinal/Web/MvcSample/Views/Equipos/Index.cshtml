@@ -43,7 +43,7 @@
                     };
 
                     <tr>
-                        <td><strong>@equipo.Nombre</strong></td>
+                        <td><strong>@(equipo.Nombre ?? "Sin nombre")</strong></td>
                         <td>@(equipo.Sala != null ? $"Sala {equipo.Sala.Numero}" : "Sin sala")</td>
                         <td>@equipo.Ubicacion</td>
                         <td>

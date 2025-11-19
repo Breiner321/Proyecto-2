@@ -87,7 +87,7 @@
                     }
 
                     <tr>
-                        <td>@equipo.Nombre</td>
+                        <td>@(equipo.Nombre ?? "Sin nombre")</td>
                         <td>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <span class="status-badge @estadoClass">@estado</span>

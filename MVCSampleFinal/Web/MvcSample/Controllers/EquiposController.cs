@@ -44,34 +44,90 @@ namespace MvcSample.Controllers
             }
 
             ViewBag.Salas = new SelectList(_context.Salas.ToList(), "Id", "Numero");
-            return View();
+            var equipo = new Equipo
+            {
+                Disponible = true,
+                Estado = "Libre"
+            };
+            return View(equipo);
         }
 
         // POST: Equipos/Create (Individual)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Nombre,Estado,Ubicacion,SalaId,Disponible")] Equipo equipo)
+        public IActionResult Create(Equipo equipo)
         {
             if (!IsAdministrator())
             {
                 return RedirectToAction("Login", "Auth");
             }
 
+            // Limpiar errores de validación de la propiedad de navegación Sala
+            ModelState.Remove("Sala");
+            
+            // Limpiar la propiedad de navegación Sala para evitar problemas de validación
+            // No es necesario asignar null explícitamente, Entity Framework lo manejará
+            
+            // Permitir que el campo Nombre esté vacío (se generará automáticamente)
+            // Remover cualquier error de validación del campo Nombre
+            ModelState.Remove("Nombre");
+            
+            // Validar que SalaId no sea Guid vacío
+            if (equipo.SalaId == Guid.Empty)
+            {
+                ModelState.AddModelError("SalaId", "Debe seleccionar una sala");
+            }
+            else
+            {
+                // Verificar que la sala existe
+                var salaExiste = _context.Salas.Any(s => s.Id == equipo.SalaId);
+                if (!salaExiste)
+                {
+                    ModelState.AddModelError("SalaId", "La sala seleccionada no existe");
+                }
+            }
+
+            // Validar que Ubicacion no esté vacía
+            if (string.IsNullOrWhiteSpace(equipo.Ubicacion))
+            {
+                ModelState.AddModelError("Ubicacion", "La ubicación es requerida");
+            }
+
             if (ModelState.IsValid)
             {
-                equipo.Id = Guid.NewGuid();
-                if (string.IsNullOrEmpty(equipo.Estado))
+                try
                 {
-                    equipo.Estado = "Libre";
+                    // Generar ID primero
+                    equipo.Id = Guid.NewGuid();
+                    
+                    // Establecer estado por defecto si está vacío
+                    if (string.IsNullOrEmpty(equipo.Estado))
+                    {
+                        equipo.Estado = "Libre";
+                    }
+                    
+                    // Si no se proporciona nombre o solo tiene espacios, generar nombre automático
+                    if (string.IsNullOrWhiteSpace(equipo.Nombre))
+                    {
+                        // Usar los primeros 8 caracteres del GUID en mayúsculas
+                        var guidString = equipo.Id.ToString().Replace("-", "").Substring(0, 8).ToUpper();
+                        equipo.Nombre = $"EQU-{guidString}";
+                    }
+                    else
+                    {
+                        // Limpiar espacios en blanco al inicio y final del nombre
+                        equipo.Nombre = equipo.Nombre?.Trim() ?? string.Empty;
+                    }
+                    
+                    _context.Add(equipo);
+                    _context.SaveChanges();
+                    TempData["SuccessMessage"] = "Equipo creado correctamente";
+                    return RedirectToAction(nameof(Index));
                 }
-                // Si no se proporciona nombre, generar ID automático
-                if (string.IsNullOrWhiteSpace(equipo.Nombre))
+                catch (Exception ex)
                 {
-                    equipo.Nombre = $"EQU-{equipo.Id.ToString().Substring(0, 8).ToUpper()}";
+                    ModelState.AddModelError("", "Error al crear el equipo: " + ex.Message);
                 }
-                _context.Add(equipo);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
             }
 
             ViewBag.Salas = new SelectList(_context.Salas.ToList(), "Id", "Numero", equipo.SalaId);
