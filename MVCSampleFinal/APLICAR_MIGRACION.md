@@ -67,3 +67,4 @@ dotnet ef database update --project "../../Infrastructure/Infrastructure" --star
 
 Pero el script SQL es más directo y garantiza que las columnas se agreguen correctamente.
 
+
