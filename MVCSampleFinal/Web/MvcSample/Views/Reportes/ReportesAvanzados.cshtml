@@ -1,3 +1,4 @@
+@using System.Linq
 @{
     ViewData["Title"] = "Reportes Avanzados";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -222,11 +223,18 @@
                 </div>
             </div>
 
-            @if (reporte.ReservasSala.Any() || reporte.ReservasEquipos.Any())
+            @{
+                var reservasSalaList = reporte.ReservasSala as System.Collections.IEnumerable ?? new List<object>();
+                var reservasEquiposList = reporte.ReservasEquipos as System.Collections.IEnumerable ?? new List<object>();
+                var reservasSalaCount = reservasSalaList.Cast<object>().Count();
+                var reservasEquiposCount = reservasEquiposList.Cast<object>().Count();
+            }
+            
+            @if (reservasSalaCount > 0 || reservasEquiposCount > 0)
             {
                 <h4 style="margin-top: 20px; color: #2c3e50;">Detalle de Reservas</h4>
                 
-                @if (reporte.ReservasSala.Any())
+                @if (reservasSalaCount > 0)
                 {
                     <h5 style="margin-top: 15px; color: #666;">Reservas de Sala</h5>
                     <table class="reservas-table">
@@ -240,7 +248,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var reserva in reporte.ReservasSala)
+                            @foreach (var reserva in reservasSalaList.Cast<dynamic>())
                             {
                                 <tr>
                                     <td>@reserva.Solicitante</td>
@@ -264,7 +272,7 @@
                     </table>
                 }
 
-                @if (reporte.ReservasEquipos.Any())
+                @if (reservasEquiposCount > 0)
                 {
                     <h5 style="margin-top: 15px; color: #666;">Reservas de Equipos</h5>
                     <table class="reservas-table">
@@ -279,7 +287,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var reserva in reporte.ReservasEquipos)
+                            @foreach (var reserva in reservasEquiposList.Cast<dynamic>())
                             {
                                 <tr>
                                     <td>@reserva.Solicitante</td>

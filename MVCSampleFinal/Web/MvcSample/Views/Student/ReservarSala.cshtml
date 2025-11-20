@@ -129,7 +129,7 @@
                 </div>
                 <div style="display: flex; gap: 10px; justify-content: flex-end;">
                     <button type="button" id="btnCancelarSala" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancelar</button>
-                    <button type="button" onclick="confirmarReservaSala('${salaId}', '${salaNombre}')" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Reservar</button>
+                    <button type="button" id="btnConfirmarReserva" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Reservar</button>
                 </div>
             `;
             
@@ -141,7 +141,8 @@
                 document.body.removeChild(modal);
             });
             
-            window.confirmarReservaSala = function(salaId, salaNombre) {
+            // Función para confirmar la reserva
+            var confirmarReserva = function() {
                 var descripcion = document.getElementById('descripcionSala').value;
                 var fechaHoraInicio = document.getElementById('fechaHoraInicioSala').value;
                 var fechaHoraFin = document.getElementById('fechaHoraFinSala').value;
@@ -190,6 +191,12 @@
                     }
                 });
             };
+            
+            // Asignar la función al botón de reservar
+            var btnReservar = document.getElementById('btnConfirmarReserva');
+            if (btnReservar) {
+                btnReservar.addEventListener('click', confirmarReserva);
+            }
         }
 
     </script>

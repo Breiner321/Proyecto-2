@@ -660,6 +660,102 @@ namespace MvcSample.Controllers
                 return Json(new { success = false, message = "Error al rechazar solicitud: " + ex.Message });
             }
         }
+
+        // GET: Coordinator/ReportesDano
+        public IActionResult ReportesDano(string buscar, string estadoFiltro = "")
+        {
+            if (!IsCoordinator())
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var reportes = _context.ReportesDano
+                .Include(r => r.Usuario)
+                .Include(r => r.Equipo)
+                    .ThenInclude(e => e.Sala)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(buscar))
+            {
+                reportes = reportes.Where(r => 
+                    r.Descripcion.Contains(buscar) || 
+                    r.Tipo.Contains(buscar) ||
+                    (r.Usuario != null && r.Usuario.Nombre.Contains(buscar)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(estadoFiltro))
+            {
+                reportes = reportes.Where(r => r.Estado == estadoFiltro);
+            }
+
+            var salas = _context.Salas.ToList();
+            
+            ViewBag.ReportesDano = reportes.OrderByDescending(r => r.Fecha).ToList();
+            ViewBag.Salas = salas;
+            ViewBag.Buscar = buscar;
+            ViewBag.EstadoFiltro = estadoFiltro;
+
+            return View();
+        }
+
+        // POST: Coordinator/ActualizarEstadoReporteDano
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ActualizarEstadoReporteDano(Guid reporteId, string nuevoEstado, string observaciones = "")
+        {
+            if (!IsCoordinator())
+            {
+                return Json(new { success = false, message = "No autorizado" });
+            }
+
+            var reporte = _context.ReportesDano
+                .Include(r => r.Equipo)
+                .FirstOrDefault(r => r.Id == reporteId);
+
+            if (reporte == null)
+            {
+                return Json(new { success = false, message = "Reporte no encontrado" });
+            }
+
+            var estadoAnterior = reporte.Estado;
+            reporte.Estado = nuevoEstado;
+            
+            if (!string.IsNullOrWhiteSpace(observaciones))
+            {
+                reporte.Observaciones = observaciones;
+            }
+
+            try
+            {
+                // Si el estado cambia a "Resuelto" y es un equipo, marcarlo como disponible
+                if (nuevoEstado == "Resuelto" && reporte.Tipo == "Equipo" && reporte.EquipoId.HasValue)
+                {
+                    var equipo = _context.Equipos.FirstOrDefault(e => e.Id == reporte.EquipoId.Value);
+                    if (equipo != null)
+                    {
+                        equipo.Estado = "Libre";
+                        equipo.Disponible = true;
+                    }
+                }
+
+                // Si el estado cambia a "Resuelto" y es una sala, marcarla como disponible
+                if (nuevoEstado == "Resuelto" && reporte.Tipo == "Sala" && reporte.SalaId.HasValue)
+                {
+                    var sala = _context.Salas.FirstOrDefault(s => s.Id == reporte.SalaId.Value);
+                    if (sala != null)
+                    {
+                        sala.Estado = "Disponible";
+                    }
+                }
+
+                _context.SaveChanges();
+                return Json(new { success = true, message = "Estado del reporte actualizado correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al actualizar el reporte: " + ex.Message });
+            }
+        }
     }
 }
 

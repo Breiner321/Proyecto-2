@@ -1,0 +1,226 @@
+@using Domain
+@{
+    ViewData["Title"] = "Reportes de Daños";
+    Layout = "~/Views/Shared/_CoordinatorLayout.cshtml";
+    var reportes = ViewBag.ReportesDano as List<ReporteDano> ?? new List<ReporteDano>();
+    var salas = ViewBag.Salas as List<Sala> ?? new List<Sala>();
+}
+
+<h2 class="page-title">Reportes de Daños</h2>
+
+<div class="search-bar">
+    <div class="search-input-wrapper">
+        <form method="get" action="@Url.Action("ReportesDano", "Coordinator")" style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" name="buscar" class="search-input" placeholder="Buscar reportes..." value="@ViewBag.Buscar" />
+            <select name="estadoFiltro" class="form-control" style="padding: 8px 12px; border: 2px solid #ddd; border-radius: 6px;">
+                <option value="">Todos los estados</option>
+                @if (ViewBag.EstadoFiltro == "Pendiente")
+                {
+                    <option value="Pendiente" selected>Pendiente</option>
+                }
+                else
+                {
+                    <option value="Pendiente">Pendiente</option>
+                }
+                @if (ViewBag.EstadoFiltro == "En Revisión")
+                {
+                    <option value="En Revisión" selected>En Revisión</option>
+                }
+                else
+                {
+                    <option value="En Revisión">En Revisión</option>
+                }
+                @if (ViewBag.EstadoFiltro == "Resuelto")
+                {
+                    <option value="Resuelto" selected>Resuelto</option>
+                }
+                else
+                {
+                    <option value="Resuelto">Resuelto</option>
+                }
+                @if (ViewBag.EstadoFiltro == "Rechazado")
+                {
+                    <option value="Rechazado" selected>Rechazado</option>
+                }
+                else
+                {
+                    <option value="Rechazado">Rechazado</option>
+                }
+            </select>
+            <button type="submit" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                <span class="search-icon">🔍</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Equipo/Sala</th>
+                <th>Usuario</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (reportes.Any())
+            {
+                @foreach (var reporte in reportes)
+                {
+                    var estadoClass = reporte.Estado switch
+                    {
+                        "Resuelto" => "status-libre",
+                        "Rechazado" => "status-bloqueado",
+                        "En Revisión" => "status-asignado",
+                        _ => "status-asignado"
+                    };
+
+                    <tr>
+                        <td>@reporte.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@reporte.Tipo</td>
+                        <td>
+                            @if (reporte.Tipo == "Equipo" && reporte.Equipo != null)
+                            {
+                                <text>@reporte.Equipo.Nombre</text>
+                                @if (reporte.Equipo.Sala != null)
+                                {
+                                    <text> - Sala @reporte.Equipo.Sala.Numero</text>
+                                }
+                            }
+                            else if (reporte.Tipo == "Sala" && reporte.SalaId.HasValue)
+                            {
+                                var salaInfo = salas.FirstOrDefault(s => s.Id == reporte.SalaId.Value);
+                                if (salaInfo != null)
+                                {
+                                    <text>Sala @salaInfo.Numero</text>
+                                }
+                                else
+                                {
+                                    <text>Sala @reporte.SalaId.Value.ToString().Substring(0, 8)...</text>
+                                }
+                            }
+                            else
+                            {
+                                <text>N/A</text>
+                            }
+                        </td>
+                        <td>@(reporte.Usuario?.Nombre ?? "N/A")</td>
+                        <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="@reporte.Descripcion">
+                            @reporte.Descripcion
+                        </td>
+                        <td>
+                            <span class="status-badge @estadoClass">@reporte.Estado</span>
+                        </td>
+                        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="@(reporte.Observaciones ?? "")">
+                            @(reporte.Observaciones ?? "-")
+                        </td>
+                        <td>
+                            @if (reporte.Estado == "Pendiente" || reporte.Estado == "En Revisión")
+                            {
+                                <div style="display: flex; gap: 5px;">
+                                    <button class="btn-approve" onclick="actualizarEstado('@reporte.Id', 'En Revisión')" 
+                                            style="padding: 5px 10px; background: #ffc107; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                        En Revisión
+                                    </button>
+                                    <button class="btn-approve" onclick="actualizarEstado('@reporte.Id', 'Resuelto')" 
+                                            style="padding: 5px 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                        Resolver
+                                    </button>
+                                    <button class="btn-reject" onclick="rechazarReporte('@reporte.Id')" 
+                                            style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                        Rechazar
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <span style="color: #999; font-size: 12px;">Sin acciones</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" style="text-align: center; padding: 40px; color: #999;">
+                        No hay reportes de daños
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+    <script>
+        function actualizarEstado(reporteId, nuevoEstado) {
+            if (!confirm('¿Está seguro de cambiar el estado del reporte a "' + nuevoEstado + '"?')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("ActualizarEstadoReporteDano", "Coordinator")',
+                method: 'POST',
+                data: {
+                    reporteId: reporteId,
+                    nuevoEstado: nuevoEstado,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Estado del reporte actualizado correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al actualizar el estado del reporte');
+                }
+            });
+        }
+
+        function rechazarReporte(reporteId) {
+            var observaciones = prompt('Ingrese las observaciones para rechazar el reporte (opcional):');
+            if (observaciones === null) {
+                return; // Usuario canceló
+            }
+
+            if (!confirm('¿Está seguro de rechazar este reporte de daño?')) {
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("ActualizarEstadoReporteDano", "Coordinator")',
+                method: 'POST',
+                data: {
+                    reporteId: reporteId,
+                    nuevoEstado: 'Rechazado',
+                    observaciones: observaciones || '',
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Reporte rechazado correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al rechazar el reporte');
+                }
+            });
+        }
+    </script>
+}
+

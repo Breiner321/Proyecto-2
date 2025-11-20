@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Web\\MvcSample\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\web\\mvcsample\\mvcsample.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|solutionrelative:mvcsample.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|c:\\users\\breiner\\desktop\\proyecto 2\\mvcsamplefinal\\web\\mvcsample\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{2A82BDE7-4194-4C20-B168-D6BA8C241F53}|MvcSample.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 131,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -35,35 +26,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MvcSample",
-              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Web\\MvcSample\\MvcSample.csproj",
-              "RelativeDocumentMoniker": "MvcSample.csproj",
-              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Web\\MvcSample\\MvcSample.csproj",
-              "RelativeToolTip": "MvcSample.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-19T15:10:24.782Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Web\\MvcSample\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Breiner\\Desktop\\Proyecto 2\\MVCSampleFinal\\Web\\MvcSample\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAwwBAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-11-18T23:02:39.122Z",
-              "EditorCaption": ""
             }
           ]
         }

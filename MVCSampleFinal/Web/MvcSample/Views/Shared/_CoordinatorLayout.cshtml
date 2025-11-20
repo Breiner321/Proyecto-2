@@ -370,8 +370,14 @@
                     </a>
                 </li>
                 <li>
+                    <a asp-controller="Coordinator" asp-action="ReportesDano" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "ReportesDano" ? "active" : "")">
+                        <span class="sidebar-menu-icon">✓</span>
+                        Reportes de Daños
+                    </a>
+                </li>
+                <li>
                     <a asp-controller="Coordinator" asp-action="Equipos" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Equipos" ? "active" : "")">
-                        <span class="sidebar-menu-icon">🖥️</span>
+                        <span class="sidebar-menu-icon">✓</span>
                         Equipos
                     </a>
                 </li>
@@ -379,12 +385,6 @@
                     <a asp-controller="Coordinator" asp-action="Reportes" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Reportes" ? "active" : "")">
                         <span class="sidebar-menu-icon">✓</span>
                         Reportes
-                    </a>
-                </li>
-                <li style="margin-top: auto; position: absolute; bottom: 20px; width: 100%;">
-                    <a asp-controller="Coordinator" asp-action="Configuracion" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Configuracion" ? "active" : "")">
-                        <span class="sidebar-menu-icon">⚙️</span>
-                        Configuracion
                     </a>
                 </li>
             </ul>

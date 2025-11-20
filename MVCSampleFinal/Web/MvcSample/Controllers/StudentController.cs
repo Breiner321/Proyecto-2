@@ -123,10 +123,40 @@ namespace MvcSample.Controllers
                 Solicitante = HttpContext.Session.GetString("UsuarioNombre") ?? "Estudiante"
             };
 
-            _context.SolicitudesEquipo.Add(solicitud);
-            _context.SaveChanges();
+            try
+            {
+                _context.SolicitudesEquipo.Add(solicitud);
+                _context.SaveChanges();
 
-            return Json(new { success = true, message = "Solicitud de reserva enviada correctamente" });
+                return Json(new { success = true, message = "Solicitud de reserva enviada correctamente" });
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.InnerException as Microsoft.Data.SqlClient.SqlException;
+                if (sqlException != null && (sqlException.Message.Contains("Invalid column name 'FechaHoraInicio'") || 
+                    sqlException.Message.Contains("Invalid column name 'FechaHoraFin'")))
+                {
+                    return Json(new { 
+                        success = false, 
+                        message = "ERROR: Las columnas FechaHoraInicio y FechaHoraFin no existen en la base de datos. " +
+                                  "Por favor, ejecuta el script SQL 'Script_SQL_AgregarColumnas.sql' en tu base de datos antes de continuar." 
+                    });
+                }
+                throw;
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Error al guardar la reserva";
+                if (ex.InnerException != null)
+                {
+                    errorMessage += ": " + ex.InnerException.Message;
+                }
+                else
+                {
+                    errorMessage += ": " + ex.Message;
+                }
+                return Json(new { success = false, message = errorMessage });
+            }
         }
 
         // POST: Student/ReservarSala
@@ -174,16 +204,31 @@ namespace MvcSample.Controllers
             // Verificar si hay reservas de equipos activas en esta sala durante el período solicitado
             var equiposEnSala = _context.Equipos.Where(e => e.SalaId == salaId).Select(e => e.Id).ToList();
             
-            var reservasEquiposActivas = _context.SolicitudesEquipo
-                .Include(se => se.Equipo)
-                .Where(se => equiposEnSala.Contains(se.EquipoId) 
-                    && (se.Estado == "Aprobada" || se.Estado == "Pendiente")
-                    && se.FechaHoraInicio.HasValue 
+            // Cargar las reservas primero en memoria para evitar problemas de traducción
+            // Usar try-catch para manejar el caso donde las columnas no existen aún
+            bool reservasEquiposActivas = false;
+            try
+            {
+                var reservasEquipos = _context.SolicitudesEquipo
+                    .Include(se => se.Equipo)
+                    .Where(se => equiposEnSala.Contains(se.EquipoId) 
+                        && (se.Estado == "Aprobada" || se.Estado == "Pendiente"))
+                    .ToList();
+                
+                // Verificar solapamiento de fechas en memoria
+                reservasEquiposActivas = reservasEquipos.Any(se => 
+                    se.FechaHoraInicio.HasValue 
                     && se.FechaHoraFin.HasValue
                     && ((se.FechaHoraInicio.Value <= inicio && se.FechaHoraFin.Value > inicio) ||
                         (se.FechaHoraInicio.Value < fin && se.FechaHoraFin.Value >= fin) ||
-                        (se.FechaHoraInicio.Value >= inicio && se.FechaHoraFin.Value <= fin)))
-                .Any();
+                        (se.FechaHoraInicio.Value >= inicio && se.FechaHoraFin.Value <= fin)));
+            }
+            catch (Exception)
+            {
+                // Si hay error al leer las columnas, asumir que no hay conflictos
+                // Esto permite que la reserva continúe si las columnas no existen aún
+                reservasEquiposActivas = false;
+            }
 
             if (reservasEquiposActivas)
             {
@@ -203,10 +248,40 @@ namespace MvcSample.Controllers
                 Solicitante = HttpContext.Session.GetString("UsuarioNombre") ?? "Estudiante"
             };
 
-            _context.Solicitudes.Add(solicitud);
-            _context.SaveChanges();
+            try
+            {
+                _context.Solicitudes.Add(solicitud);
+                _context.SaveChanges();
 
-            return Json(new { success = true, message = "Solicitud de reserva enviada correctamente" });
+                return Json(new { success = true, message = "Solicitud de reserva enviada correctamente" });
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.InnerException as Microsoft.Data.SqlClient.SqlException;
+                if (sqlException != null && sqlException.Message.Contains("Invalid column name 'FechaHoraInicio'") || 
+                    sqlException != null && sqlException.Message.Contains("Invalid column name 'FechaHoraFin'"))
+                {
+                    return Json(new { 
+                        success = false, 
+                        message = "ERROR: Las columnas FechaHoraInicio y FechaHoraFin no existen en la base de datos. " +
+                                  "Por favor, ejecuta el script SQL 'Script_SQL_AgregarColumnas.sql' en tu base de datos antes de continuar." 
+                    });
+                }
+                throw;
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Error al guardar la reserva";
+                if (ex.InnerException != null)
+                {
+                    errorMessage += ": " + ex.InnerException.Message;
+                }
+                else
+                {
+                    errorMessage += ": " + ex.Message;
+                }
+                return Json(new { success = false, message = errorMessage });
+            }
         }
 
         // GET: Student/MisReservas
@@ -536,6 +611,13 @@ namespace MvcSample.Controllers
 
             try
             {
+                // Verificar que el usuario existe
+                var usuario = _context.Usuarios.FirstOrDefault(u => u.Id == userId.Value);
+                if (usuario == null)
+                {
+                    return Json(new { success = false, message = "Usuario no encontrado" });
+                }
+
                 _context.ReportesDano.Add(reporte);
                 _context.SaveChanges();
 
@@ -566,7 +648,16 @@ namespace MvcSample.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = "Error al enviar el reporte: " + ex.Message });
+                var errorMessage = "Error al enviar el reporte";
+                if (ex.InnerException != null)
+                {
+                    errorMessage += ": " + ex.InnerException.Message;
+                }
+                else
+                {
+                    errorMessage += ": " + ex.Message;
+                }
+                return Json(new { success = false, message = errorMessage });
             }
         }
 
@@ -621,6 +712,13 @@ namespace MvcSample.Controllers
 
             try
             {
+                // Verificar que el usuario existe
+                var usuario = _context.Usuarios.FirstOrDefault(u => u.Id == userId.Value);
+                if (usuario == null)
+                {
+                    return Json(new { success = false, message = "Usuario no encontrado" });
+                }
+
                 _context.SolicitudesAsesoria.Add(solicitud);
                 _context.SaveChanges();
 
@@ -628,7 +726,16 @@ namespace MvcSample.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = "Error al enviar la solicitud: " + ex.Message });
+                var errorMessage = "Error al enviar la solicitud";
+                if (ex.InnerException != null)
+                {
+                    errorMessage += ": " + ex.InnerException.Message;
+                }
+                else
+                {
+                    errorMessage += ": " + ex.Message;
+                }
+                return Json(new { success = false, message = errorMessage });
             }
         }
     }

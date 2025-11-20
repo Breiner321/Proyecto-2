@@ -34,22 +34,31 @@ namespace Infrastructure
                 .HasForeignKey(s => s.SalaId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Ignorar temporalmente las propiedades FechaHoraInicio y FechaHoraFin
-            // hasta que se agreguen las columnas a la base de datos
-            // Esto permite que el código funcione incluso si las columnas no existen
-            modelBuilder.Entity<Solicitud>()
-                .Ignore(s => s.FechaHoraInicio)
-                .Ignore(s => s.FechaHoraFin);
-            
-            modelBuilder.Entity<SolicitudEquipo>()
-                .Ignore(s => s.FechaHoraInicio)
-                .Ignore(s => s.FechaHoraFin);
-
             // Configurar ReporteDano
             modelBuilder.Entity<ReporteDano>()
                 .HasOne<Sala>()
                 .WithMany()
                 .HasForeignKey(r => r.SalaId)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            // Configurar relaciones de ReporteDano con Usuario y Equipo
+            modelBuilder.Entity<ReporteDano>()
+                .HasOne(r => r.Usuario)
+                .WithMany()
+                .HasForeignKey(r => r.UsuarioId)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            modelBuilder.Entity<ReporteDano>()
+                .HasOne(r => r.Equipo)
+                .WithMany()
+                .HasForeignKey(r => r.EquipoId)
+                .OnDelete(DeleteBehavior.NoAction);
+            
+            // Configurar relaciones de SolicitudAsesoria con Usuario
+            modelBuilder.Entity<SolicitudAsesoria>()
+                .HasOne(s => s.Usuario)
+                .WithMany()
+                .HasForeignKey(s => s.UsuarioId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

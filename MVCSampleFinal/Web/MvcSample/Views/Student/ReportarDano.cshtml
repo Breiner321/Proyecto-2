@@ -204,15 +204,33 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert('Reporte de daño enviado correctamente');
-                        document.getElementById('reporteDanoForm').reset();
-                        actualizarOpciones();
+                        var mensaje = 'Reporte de daño enviado correctamente.\n\n';
+                        mensaje += '¿Desea solicitar asesoría técnica relacionada con este daño?';
+                        if (confirm(mensaje)) {
+                            window.location.href = '@Url.Action("SolicitarAsesoria", "Student")';
+                        } else {
+                            document.getElementById('reporteDanoForm').reset();
+                            actualizarOpciones();
+                        }
                     } else {
                         alert('Error: ' + response.message);
                     }
                 },
-                error: function() {
-                    alert('Error al enviar el reporte de daño');
+                error: function(xhr, status, error) {
+                    var errorMessage = 'Error al enviar el reporte de daño';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage += ': ' + xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        try {
+                            var errorData = JSON.parse(xhr.responseText);
+                            if (errorData.message) {
+                                errorMessage += ': ' + errorData.message;
+                            }
+                        } catch (e) {
+                            errorMessage += '. Por favor, intente nuevamente.';
+                        }
+                    }
+                    alert(errorMessage);
                 }
             });
         });
