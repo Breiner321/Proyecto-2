@@ -147,34 +147,5 @@ namespace MVCSampleFinal.Controllers
             return RedirectToAction("Login");
         }
 
-        [HttpGet]
-        public IActionResult OlvideContraseña()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult OlvideContraseña(string correo)
-        {
-            if (string.IsNullOrWhiteSpace(correo))
-            {
-                ViewBag.Error = "Por favor ingrese su correo electrónico.";
-                return View();
-            }
-
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.Correo == correo);
-            if (usuario == null)
-            {
-                // Por seguridad, no revelamos si el correo existe o no
-                ViewBag.Success = "Si el correo existe, se enviará un enlace para restablecer la contraseña.";
-                return View();
-            }
-
-            // Aquí deberías implementar el envío de correo para restablecer contraseña
-            // Por ahora, solo mostramos un mensaje
-            ViewBag.Success = "Se ha enviado un enlace a su correo electrónico para restablecer la contraseña.";
-            return View();
-        }
     }
 }
