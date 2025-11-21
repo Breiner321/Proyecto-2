@@ -17,7 +17,7 @@ namespace Domain
         // No agregamos navegación a Sala para evitar problemas de cascada
 
         public Guid UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
 
         public string Descripcion { get; set; } = string.Empty;
 

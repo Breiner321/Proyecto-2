@@ -1,12 +1,13 @@
 # Sistema de Gestión de Reservas de Salas y Equipos
 
-Sistema web desarrollado en ASP.NET Core MVC para la gestión de reservas de salas y equipos en una institución educativa. El sistema permite a estudiantes reservar salas y equipos, mientras que administradores y coordinadores gestionan los recursos y las solicitudes.
+Sistema web desarrollado en ASP.NET Core MVC para la gestión de reservas de salas y equipos en la Universidad Santiago de Cali. El sistema permite a estudiantes reservar salas y equipos, mientras que administradores y coordinadores gestionan los recursos y las solicitudes.
 
 ## 📋 Tabla de Contenidos
 
 - [Características](#características)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Arquitectura del Proyecto](#arquitectura-del-proyecto)
+- [Diagrama de Clases UML](#diagrama-de-clases-uml)
 - [Requisitos Previos](#requisitos-previos)
 - [Instalación](#instalación)
 - [Configuración](#configuración)
@@ -57,6 +58,32 @@ MVCSampleFinal/
 3. **Services**: Contiene la lógica de aplicación y servicios auxiliares
 4. **Web**: Capa de presentación con controladores MVC y vistas Razor
 
+## 📊 Diagrama de Clases UML
+
+El proyecto incluye diagramas de clases UML en diferentes formatos:
+
+- **`DIAGRAMA_CLASES_UML.puml`**: Diagrama en formato PlantUML (recomendado para visualización detallada)
+- **`DIAGRAMA_CLASES_MERMAID.md`**: Diagrama en formato Mermaid (compatible con GitHub y muchas plataformas)
+- **`DIAGRAMA_CLASES_UML.md`**: Documentación detallada del diagrama
+
+### Visualizar el Diagrama
+
+**PlantUML:**
+- VS Code: Instala la extensión "PlantUML"
+- Online: [PlantUML Web Server](http://www.plantuml.com/plantuml/uml/)
+- Desktop: Descarga desde [plantuml.com](https://plantuml.com/starting)
+
+**Mermaid:**
+- Se visualiza automáticamente en GitHub
+- VS Code: Extensión "Markdown Preview Mermaid Support"
+- Online: [Mermaid Live Editor](https://mermaid.live/)
+
+El diagrama incluye:
+- Todas las entidades del dominio (Usuario, Sala, Equipo, Solicitud, etc.)
+- Relaciones entre entidades
+- Controladores MVC
+- Clases de infraestructura (AppDbContext, BaseRepository)
+
 ## 📦 Requisitos Previos
 
 - [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
@@ -68,7 +95,7 @@ MVCSampleFinal/
 
 1. **Clonar el repositorio** (o descargar el proyecto):
 ```bash
-git clone <url-del-repositorio>
+git clone <https://github.com/Breiner321/Proyecto-2>
 cd MVCSampleFinal
 ```
 
@@ -126,9 +153,6 @@ cd Web/MvcSample
 dotnet run
 ```
 
-La aplicación estará disponible en:
-- HTTP: `http://localhost:5000`
-- HTTPS: `https://localhost:5001`
 
 ### Acceso Inicial
 

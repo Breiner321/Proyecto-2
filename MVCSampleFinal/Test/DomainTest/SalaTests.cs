@@ -1,22 +1,22 @@
 using Domain;
+using Xunit;
 
 namespace DomainTest
 {
-    [TestFixture]
     public class SalaTests
     {
-        [Test]
+        [Fact]
         public void Sala_Constructor_ShouldInitializeEquiposList()
         {
             // Arrange & Act
             var sala = new Sala();
 
             // Assert
-            Assert.That(sala.Equipos, Is.Not.Null);
-            Assert.That(sala.Equipos, Is.Empty);
+            Assert.NotNull(sala.Equipos);
+            Assert.Empty(sala.Equipos);
         }
 
-        [Test]
+        [Fact]
         public void Sala_Properties_ShouldBeInitialized()
         {
             // Arrange & Act
@@ -30,14 +30,14 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(sala.Id, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(sala.Numero, Is.EqualTo("A"));
-            Assert.That(sala.Capacidad, Is.EqualTo(30));
-            Assert.That(sala.Ubicacion, Is.EqualTo("Edificio Principal"));
-            Assert.That(sala.Estado, Is.EqualTo("Disponible"));
+            Assert.NotEqual(Guid.Empty, sala.Id);
+            Assert.Equal("A", sala.Numero);
+            Assert.Equal(30, sala.Capacidad);
+            Assert.Equal("Edificio Principal", sala.Ubicacion);
+            Assert.Equal("Disponible", sala.Estado);
         }
 
-        [Test]
+        [Fact]
         public void AdicionarEquipo_ShouldAddEquipoToEquiposList()
         {
             // Arrange
@@ -53,11 +53,11 @@ namespace DomainTest
             sala.AdicionarEquipo(equipo);
 
             // Assert
-            Assert.That(sala.Equipos, Has.Count.EqualTo(1));
-            Assert.That(sala.Equipos[0], Is.EqualTo(equipo));
+            Assert.Single(sala.Equipos);
+            Assert.Equal(equipo, sala.Equipos[0]);
         }
 
-        [Test]
+        [Fact]
         public void AdicionarEquipo_MultipleEquipos_ShouldAddAllEquipos()
         {
             // Arrange
@@ -70,9 +70,7 @@ namespace DomainTest
             sala.AdicionarEquipo(equipo2);
 
             // Assert
-            Assert.That(sala.Equipos, Has.Count.EqualTo(2));
+            Assert.Equal(2, sala.Equipos.Count);
         }
     }
 }
-
-

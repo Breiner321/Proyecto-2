@@ -1,11 +1,11 @@
 using Domain;
+using Xunit;
 
 namespace DomainTest
 {
-    [TestFixture]
     public class SolicitudTests
     {
-        [Test]
+        [Fact]
         public void Solicitud_Properties_ShouldBeInitialized()
         {
             // Arrange & Act
@@ -23,18 +23,18 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(solicitud.Id, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(solicitud.Descripcion, Is.EqualTo("Reserva de sala para proyecto"));
-            Assert.That(solicitud.Fecha, Is.Not.EqualTo(default(DateTime)));
-            Assert.That(solicitud.FechaHoraInicio, Is.Not.Null);
-            Assert.That(solicitud.FechaHoraFin, Is.Not.Null);
-            Assert.That(solicitud.Estado, Is.EqualTo("Pendiente"));
-            Assert.That(solicitud.Solicitante, Is.EqualTo("Juan Pérez"));
-            Assert.That(solicitud.UsuarioId, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(solicitud.SalaId, Is.Not.EqualTo(Guid.Empty));
+            Assert.NotEqual(Guid.Empty, solicitud.Id);
+            Assert.Equal("Reserva de sala para proyecto", solicitud.Descripcion);
+            Assert.NotEqual(default(DateTime), solicitud.Fecha);
+            Assert.NotNull(solicitud.FechaHoraInicio);
+            Assert.NotNull(solicitud.FechaHoraFin);
+            Assert.Equal("Pendiente", solicitud.Estado);
+            Assert.Equal("Juan Pérez", solicitud.Solicitante);
+            Assert.NotEqual(Guid.Empty, solicitud.UsuarioId);
+            Assert.NotEqual(Guid.Empty, solicitud.SalaId);
         }
 
-        [Test]
+        [Fact]
         public void Solicitud_FechaHoraInicio_CanBeNull()
         {
             // Arrange & Act
@@ -49,10 +49,8 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(solicitud.FechaHoraInicio, Is.Null);
-            Assert.That(solicitud.FechaHoraFin, Is.Null);
+            Assert.Null(solicitud.FechaHoraInicio);
+            Assert.Null(solicitud.FechaHoraFin);
         }
     }
 }
-
-

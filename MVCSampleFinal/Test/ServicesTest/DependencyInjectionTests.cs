@@ -1,11 +1,11 @@
 using Services;
+using Xunit;
 
 namespace ServicesTest
 {
-    [TestFixture]
     public class DependencyInjectionTests
     {
-        [Test]
+        [Fact]
         public void DependencyInjection_ClassExists_ShouldCompile()
         {
             // Arrange & Act
@@ -13,10 +13,8 @@ namespace ServicesTest
             var type = typeof(Dependencyinjection);
 
             // Assert
-            Assert.That(type, Is.Not.Null);
-            Assert.That(type.Name, Is.EqualTo("Dependencyinjection"));
+            Assert.NotNull(type);
+            Assert.Equal("Dependencyinjection", type.Name);
         }
     }
 }
-
-

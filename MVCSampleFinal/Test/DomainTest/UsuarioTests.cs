@@ -1,24 +1,24 @@
 using Domain;
+using Xunit;
 
 namespace DomainTest
 {
-    [TestFixture]
     public class UsuarioTests
     {
-        [Test]
+        [Fact]
         public void Usuario_Constructor_ShouldInitializeLists()
         {
             // Arrange & Act
             var usuario = new Usuario();
 
             // Assert
-            Assert.That(usuario.Solicitudes, Is.Not.Null);
-            Assert.That(usuario.Solicitudes, Is.Empty);
-            Assert.That(usuario.SolicitudesEquipo, Is.Not.Null);
-            Assert.That(usuario.SolicitudesEquipo, Is.Empty);
+            Assert.NotNull(usuario.Solicitudes);
+            Assert.Empty(usuario.Solicitudes);
+            Assert.NotNull(usuario.SolicitudesEquipo);
+            Assert.Empty(usuario.SolicitudesEquipo);
         }
 
-        [Test]
+        [Fact]
         public void Usuario_Properties_ShouldBeInitialized()
         {
             // Arrange & Act
@@ -32,14 +32,14 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(usuario.Id, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(usuario.Nombre, Is.EqualTo("Juan Pérez"));
-            Assert.That(usuario.Correo, Is.EqualTo("juan@example.com"));
-            Assert.That(usuario.Contraseña, Is.EqualTo("password123"));
-            Assert.That(usuario.Rol, Is.EqualTo("Estudiante"));
+            Assert.NotEqual(Guid.Empty, usuario.Id);
+            Assert.Equal("Juan Pérez", usuario.Nombre);
+            Assert.Equal("juan@example.com", usuario.Correo);
+            Assert.Equal("password123", usuario.Contraseña);
+            Assert.Equal("Estudiante", usuario.Rol);
         }
 
-        [Test]
+        [Fact]
         public void AdicionarSolicitud_ShouldAddSolicitudToSolicitudesList()
         {
             // Arrange
@@ -57,11 +57,11 @@ namespace DomainTest
             usuario.AdicionarSolicitud(solicitud);
 
             // Assert
-            Assert.That(usuario.Solicitudes, Has.Count.EqualTo(1));
-            Assert.That(usuario.Solicitudes[0], Is.EqualTo(solicitud));
+            Assert.Single(usuario.Solicitudes);
+            Assert.Equal(solicitud, usuario.Solicitudes[0]);
         }
 
-        [Test]
+        [Fact]
         public void AdicionarSolicitudEquipo_ShouldAddSolicitudEquipoToSolicitudesEquipoList()
         {
             // Arrange
@@ -79,10 +79,8 @@ namespace DomainTest
             usuario.AdicionarSolicitudEquipo(solicitudEquipo);
 
             // Assert
-            Assert.That(usuario.SolicitudesEquipo, Has.Count.EqualTo(1));
-            Assert.That(usuario.SolicitudesEquipo[0], Is.EqualTo(solicitudEquipo));
+            Assert.Single(usuario.SolicitudesEquipo);
+            Assert.Equal(solicitudEquipo, usuario.SolicitudesEquipo[0]);
         }
     }
 }
-
-

@@ -1,22 +1,22 @@
 using Domain;
+using Xunit;
 
 namespace DomainTest
 {
-    [TestFixture]
     public class EquipoTests
     {
-        [Test]
+        [Fact]
         public void Equipo_Constructor_ShouldInitializeSolicitudesEquipoList()
         {
             // Arrange & Act
             var equipo = new Equipo();
 
             // Assert
-            Assert.That(equipo.SolicitudesEquipo, Is.Not.Null);
-            Assert.That(equipo.SolicitudesEquipo, Is.Empty);
+            Assert.NotNull(equipo.SolicitudesEquipo);
+            Assert.Empty(equipo.SolicitudesEquipo);
         }
 
-        [Test]
+        [Fact]
         public void Equipo_Properties_ShouldBeInitialized()
         {
             // Arrange & Act
@@ -31,15 +31,15 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(equipo.Id, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(equipo.Nombre, Is.EqualTo("Laptop Dell"));
-            Assert.That(equipo.Estado, Is.EqualTo("Libre"));
-            Assert.That(equipo.Ubicacion, Is.EqualTo("Sala A"));
-            Assert.That(equipo.SalaId, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(equipo.Disponible, Is.True);
+            Assert.NotEqual(Guid.Empty, equipo.Id);
+            Assert.Equal("Laptop Dell", equipo.Nombre);
+            Assert.Equal("Libre", equipo.Estado);
+            Assert.Equal("Sala A", equipo.Ubicacion);
+            Assert.NotEqual(Guid.Empty, equipo.SalaId);
+            Assert.True(equipo.Disponible);
         }
 
-        [Test]
+        [Fact]
         public void Equipo_Nombre_CanBeNull()
         {
             // Arrange & Act
@@ -51,9 +51,7 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(equipo.Nombre, Is.Null);
+            Assert.Null(equipo.Nombre);
         }
     }
 }
-
-

@@ -12,7 +12,7 @@ namespace Domain
         [Key]
         public Guid Id { get; set; }
 
-        public string Descripcion { get; set; } 
+        public string Descripcion { get; set; } = string.Empty;
 
         public DateTime Fecha { get; set; }
 
@@ -20,12 +20,12 @@ namespace Domain
 
         public DateTime? FechaHoraFin { get; set; }
 
-        public string Estado { get; set; } 
+        public string Estado { get; set; } = string.Empty;
 
-        public string Solicitante { get; set; }
+        public string Solicitante { get; set; } = string.Empty;
         
         public Guid UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
         public Guid SalaId { get; set; }
         // Relación removida para evitar ciclo de cascada
         // Acceder a la Sala a través de consultas manuales si es necesario

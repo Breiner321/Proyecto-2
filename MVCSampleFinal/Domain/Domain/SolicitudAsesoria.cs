@@ -9,7 +9,7 @@ namespace Domain
         public Guid Id { get; set; }
 
         public Guid UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
 
         public string Descripcion { get; set; } = string.Empty;
 

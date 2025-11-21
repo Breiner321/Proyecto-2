@@ -1,11 +1,11 @@
 using Domain;
+using Xunit;
 
 namespace DomainTest
 {
-    [TestFixture]
     public class ReporteDanoTests
     {
-        [Test]
+        [Fact]
         public void ReporteDano_Properties_ShouldBeInitialized()
         {
             // Arrange & Act
@@ -22,17 +22,17 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(reporte.Id, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(reporte.Tipo, Is.EqualTo("Equipo"));
-            Assert.That(reporte.EquipoId, Is.Not.Null);
-            Assert.That(reporte.SalaId, Is.Null);
-            Assert.That(reporte.UsuarioId, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(reporte.Descripcion, Is.EqualTo("Pantalla rota"));
-            Assert.That(reporte.Fecha, Is.Not.EqualTo(default(DateTime)));
-            Assert.That(reporte.Estado, Is.EqualTo("Pendiente"));
+            Assert.NotEqual(Guid.Empty, reporte.Id);
+            Assert.Equal("Equipo", reporte.Tipo);
+            Assert.NotNull(reporte.EquipoId);
+            Assert.Null(reporte.SalaId);
+            Assert.NotEqual(Guid.Empty, reporte.UsuarioId);
+            Assert.Equal("Pantalla rota", reporte.Descripcion);
+            Assert.NotEqual(default(DateTime), reporte.Fecha);
+            Assert.Equal("Pendiente", reporte.Estado);
         }
 
-        [Test]
+        [Fact]
         public void ReporteDano_Sala_ShouldSetSalaId()
         {
             // Arrange & Act
@@ -48,12 +48,12 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(reporte.Tipo, Is.EqualTo("Sala"));
-            Assert.That(reporte.SalaId, Is.Not.Null);
-            Assert.That(reporte.EquipoId, Is.Null);
+            Assert.Equal("Sala", reporte.Tipo);
+            Assert.NotNull(reporte.SalaId);
+            Assert.Null(reporte.EquipoId);
         }
 
-        [Test]
+        [Fact]
         public void ReporteDano_Estado_DefaultShouldBePendiente()
         {
             // Arrange & Act
@@ -67,9 +67,7 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(reporte.Estado, Is.EqualTo("Pendiente"));
+            Assert.Equal("Pendiente", reporte.Estado);
         }
     }
 }
-
-

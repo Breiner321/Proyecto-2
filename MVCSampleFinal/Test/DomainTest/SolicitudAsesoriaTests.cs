@@ -1,11 +1,11 @@
 using Domain;
+using Xunit;
 
 namespace DomainTest
 {
-    [TestFixture]
     public class SolicitudAsesoriaTests
     {
-        [Test]
+        [Fact]
         public void SolicitudAsesoria_Properties_ShouldBeInitialized()
         {
             // Arrange & Act
@@ -23,17 +23,17 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(solicitud.Id, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(solicitud.UsuarioId, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(solicitud.Descripcion, Is.EqualTo("Necesito ayuda con el software"));
-            Assert.That(solicitud.TipoAsesoria, Is.EqualTo("Técnica"));
-            Assert.That(solicitud.Fecha, Is.Not.EqualTo(default(DateTime)));
-            Assert.That(solicitud.FechaHoraSolicitada, Is.Not.Null);
-            Assert.That(solicitud.Estado, Is.EqualTo("Pendiente"));
-            Assert.That(solicitud.Solicitante, Is.EqualTo("Carlos López"));
+            Assert.NotEqual(Guid.Empty, solicitud.Id);
+            Assert.NotEqual(Guid.Empty, solicitud.UsuarioId);
+            Assert.Equal("Necesito ayuda con el software", solicitud.Descripcion);
+            Assert.Equal("Técnica", solicitud.TipoAsesoria);
+            Assert.NotEqual(default(DateTime), solicitud.Fecha);
+            Assert.NotNull(solicitud.FechaHoraSolicitada);
+            Assert.Equal("Pendiente", solicitud.Estado);
+            Assert.Equal("Carlos López", solicitud.Solicitante);
         }
 
-        [Test]
+        [Fact]
         public void SolicitudAsesoria_FechaHoraSolicitada_CanBeNull()
         {
             // Arrange & Act
@@ -49,10 +49,10 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(solicitud.FechaHoraSolicitada, Is.Null);
+            Assert.Null(solicitud.FechaHoraSolicitada);
         }
 
-        [Test]
+        [Fact]
         public void SolicitudAsesoria_Estado_DefaultShouldBePendiente()
         {
             // Arrange & Act
@@ -66,9 +66,7 @@ namespace DomainTest
             };
 
             // Assert
-            Assert.That(solicitud.Estado, Is.EqualTo("Pendiente"));
+            Assert.Equal("Pendiente", solicitud.Estado);
         }
     }
 }
-
-
